@@ -4,6 +4,7 @@
 .cache/
 .config/
 .esd_auth
+.gitconfig
 .local/
 .mozilla/
 .pki/
