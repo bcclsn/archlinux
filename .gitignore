@@ -7,6 +7,7 @@
 .gitconfig
 .local/
 .mozilla/
+.oh-my-zsh/
 .pki/
 .tmux/
 .yaourtrc
