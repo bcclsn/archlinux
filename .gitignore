@@ -5,6 +5,7 @@
 .config/
 .esd_auth
 .gitconfig
+.kodi/
 .local/
 .mozilla/
 .oh-my-zsh/
