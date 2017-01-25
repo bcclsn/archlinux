@@ -5,6 +5,7 @@
 .config/
 .esd_auth
 .gitconfig
+.gnupg/
 .kodi/
 .local/
 .mozilla/
