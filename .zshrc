@@ -81,16 +81,17 @@ source $HOME/.zsh/setopt.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [[ -z "$TMUX" ]]
-then
-    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
-    if [[ -z "$ID" ]]
-    then
+# Set tmux for all terminals
+    if [[ -z "$TMUX" ]]; then
+        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
+    if [[ -z "$ID" ]]; then
        tmux new-session
     else
        tmux attach-session -t "$ID"
     fi
-fi
+    fi
+
+# create a directory, then change into it
 
 ##echo "inizio blocco info"
 echo ""                                                          
