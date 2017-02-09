@@ -13,6 +13,7 @@
 .pki/
 .telegram/
 .tmux/
+.tor/
 .yaourtrc
 .wget-hsts
 .zcompdump-dreamspark-5.3.1
