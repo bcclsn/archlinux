@@ -11,6 +11,7 @@
 .mozilla/
 .oh-my-zsh/
 .pki/
+.ssh/
 .telegram/
 .tmux/
 .tor/
