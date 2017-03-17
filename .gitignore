@@ -6,12 +6,15 @@
 .esd_auth
 .gitconfig
 .gnupg/
+.java/
 .kodi/
 .local/
+.matlab/
 .mozilla/
 .oh-my-zsh/
 .pki/
 .ssh/
+.subversion/
 .telegram/
 .tmux/
 .tor/
