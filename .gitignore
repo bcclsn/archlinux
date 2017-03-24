@@ -20,6 +20,7 @@
 .tor/
 .yaourtrc
 .wget-hsts
+.wine/
 .zcompdump-dreamspark-5.3.1
 .zsh-update
 .zsh_history
