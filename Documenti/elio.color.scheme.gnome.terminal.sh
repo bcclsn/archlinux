@@ -28,4 +28,4 @@ CURSOR_COLOR="$FOREGROUND_COLOR" # Cursor
 # | Apply Colors
 # | ===========================================
 source $(cd "$(dirname "$(readlink -f "$0")")" && pwd)/../_apply-colors.sh || \
-  source <(wget  -O - http://git.io/vY8Qq)
+source <(wget  -O - http://git.io/vY8Qq)
