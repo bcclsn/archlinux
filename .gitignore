@@ -13,6 +13,7 @@
 .mozilla/
 .oh-my-zsh/
 .pki/
+.script/
 .ssh/
 .subversion/
 .telegram/
