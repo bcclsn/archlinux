@@ -4,7 +4,7 @@
 Version=1.0
 Name=Random Wallpaper Changer
 Comment=bcclsn
-Exec=/home/bcclsn/.wallpaper_changer.sh
+Exec=/home/bcclsn/.script/wallpaper_changer.sh
 Icon=/usr/share/icons/Paper/512x512@2x/apps/luminance-hdr.png
 Terminal=false
 Type=Application
