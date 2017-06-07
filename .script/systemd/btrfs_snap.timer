@@ -1,0 +1,11 @@
+[Unit]
+#Description=Snap Settimanale - Ogni Venerdì alle 00:00:00
+Description=Snap Settimanale - Ogni 7 giorni dalla data di avvio del timer
+
+[Timer]
+#OnCalendar=Fri *-*-* 00:00:00
+OnActiveSec=7d
+Persistent=true
+
+[Install]
+WantedBy=timers.target

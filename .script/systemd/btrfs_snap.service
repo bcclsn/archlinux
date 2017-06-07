@@ -1,0 +1,6 @@
+[Unit]
+Description=Snap Settimanale
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /home/bcclsn/.script/btrfs_snap.sh 
