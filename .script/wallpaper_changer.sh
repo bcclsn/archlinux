@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wallpaperdir='/home/bcclsn/Immagini/wallpaper/'  							#impostare la cartella con gli sfondi desktop
+wallpaperdir='/home/bcclsn/Immagini/wallpaper'  							#impostare la cartella con gli sfondi desktop
 files=($wallpaperdir/*)
 randompic=`printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
 gsettings set org.gnome.desktop.background picture-uri $randompic
