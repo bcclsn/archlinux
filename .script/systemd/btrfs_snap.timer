@@ -1,10 +1,8 @@
 [Unit]
-#Description=Snap Settimanale - Ogni Venerdì alle 00:00:00
-Description=Snap Settimanale - Ogni 7 giorni dalla data di avvio del timer
+Description=Snap Settimanale - Ogni Venerdì alle 00:00:00
 
 [Timer]
-#OnCalendar=Fri *-*-* 00:00:00
-OnActiveSec=7d
+OnCalendar=Fri *-*-* 00:00:00
 Persistent=true
 
 [Install]
