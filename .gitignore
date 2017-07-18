@@ -3,6 +3,7 @@
 .bzr.log
 .cache/
 .config/
+.eclipse/
 .esd_auth
 .gitconfig
 .gnupg/
@@ -12,9 +13,11 @@
 .matlab/
 .mozilla/
 .oh-my-zsh/
+.p2/
 .pki/
 .ssh/
 .subversion/
+.swt/
 .telegram/
 .tmux/
 .tor/
