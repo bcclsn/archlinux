@@ -1,0 +1,9 @@
+## pacaur
+depends: cower
+add key pgp: gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+add pod2man to path: PATH=$PATH:/usr/bin/core_perl
+
+
+## dd progress
+1. dd if= | pv | dd of=
+2. dd if= of= status=progress

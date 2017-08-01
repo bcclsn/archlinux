@@ -1,0 +1,23 @@
+Microphone not detected by PulseAudio
+
+Determine the card and device number of your mic:
+
+ $ arecord -l
+ **** List of CAPTURE Hardware Devices ****
+ card 0: PCH [HDA Intel PCH], device 0: ALC269VC Analog [ALC269VC Analog]
+ Subdevices: 1/1
+ Subdevice #0: subdevice #0
+
+In hw:CARD,DEVICE notation, you would specify the above device as hw:0,0.
+
+Then, edit /etc/pulse/default.pa and insert a load-module line specifying your device as follows:
+
+  load-module module-alsa-source device=hw:0,0
+  # the line above should be somewhere before the line below
+ .ifexists module-udev-detect.so
+
+Finally, restart pulseaudio to apply the new settings:
+
+  $ pulseaudio -k ; pulseaudio -D
+
+If everything worked correctly, you should now see your mic show up when running pavucontrol (under the Input Devices tab). 

@@ -1,0 +1,9 @@
+pacaur -S eclipse-cpp gcc-arm-none-eabi-bin chibios
+
+
+archlinux-java set java-8-openjdk/jre
+
+
+NOTE. 
+1. modificare il pkgbuld di chibios per installarlo nella home invece che in /usr/src altrimenti java non potrà scrivere nella cartella. alternativamente, modificare i permessi di /usr/src/chibios
+2. punto (8) non trovato e punto (10) selezionare /release/nome_versione_eclipse. la 4.7 in uso è Oxygen
