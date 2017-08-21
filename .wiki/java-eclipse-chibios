@@ -1,0 +1,54 @@
+## bcclsn
+## v2.0.0
+## ago.17
+
+#forse gcc-arm-none-eabi-bin non serve
+pacaur -S eclipse-cpp gcc-arm-none-eabi-bin arm-none-eabi-gdb chibios gnuarmeclipse-openocd-bin
+
+
+#setta java 8 di default
+archlinux-java set java-8-openjdk/jre
+
+
+NOTE. 
+1. modificare il pkgbuld di chibios per installarlo nella home invece che in /usr/src altrimenti java non potrà scrivere nella cartella. alternativamente, modificare ricorsivamente i permessi di 
+/usr/src/chibios. modifica ricorsiva (-R) altrimenti eclipse non potrà creare la cartella di build e debug.
+2. punto (8) non trovato e punto (10) selezionare /release/nome_versione_eclipse. la 4.7 in uso è Oxygen
+3. chibios non è aggiornato. modificare il pkgbuild e il .srcinfo per installare la versione più aggiornata (17.6.0) 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PKGBUILD
+# Maintainer: Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+# 17.6.0 updated by bcclsn
+
+pkgname=chibios
+pkgver=17.6.0
+pkgrel=1
+pkgdesc="ChibiOS - free embedded RTOS"
+arch=('any')
+license=('GPL')
+url="http://chibios.org"
+source=("https://sourceforge.net/projects/chibios/files/ChibiOS_RT%20stable/Version%20${pkgver}/ChibiOS_${pkgver}.7z")
+md5sums=('27aeafca315242cd71728691a348dd25')
+
+package() {
+    mkdir -p ${pkgdir}/usr/src/chibios
+    cp -r ${srcdir}/ChibiOS_${pkgver}/* ${pkgdir}/usr/src/chibios
+}
+
+.SRCINFO
+pkgbase = chibios
+	pkgdesc = ChibiOS - free embedded RTOS
+	pkgver = 17.6.0
+	pkgrel = 1
+	url = http://chibios.org
+	arch = any
+	license = GPL
+	source = https://sourceforge.net/projects/chibios/files/ChibiOS_RT%20stable/Version%2017.6.0/ChibiOS_17.6.0.7z
+	md5sums = 27aeafca315242cd71728691a348dd25
+
+pkgname = chibios
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. finita l'installazione bisogna configurare eclipse per usare chibios come workspace e creare le configurazione di flash and run e debug. 
+   N.B. prendere esempio da installazione chibistudio preview 19 (windows)
