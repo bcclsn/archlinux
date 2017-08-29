@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Name=Random Wallpaper Changer
+Comment=bcclsn
+Exec=/home/bcclsn/.script/wallpaper_changer.sh
+Icon=/usr/share/icons/Paper/512x512@2x/apps/luminance-hdr.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+Name[it_IT]=Random Wallpaper Changer
