@@ -1,29 +1,25 @@
-### bcclsn
-### v1.0
-###
-### installazione
+### installazione 
+### ver 2.1
+### bcclsn 
 
-loadkeys it
+
 
 cfdisk /dev/sda
 
-/dev/sda1 EFI boot partition 256M
-/dev/sda2 Linux Partition XXXG
+/dev/sda1 EFI System 256M
+/dev/sda2 Linux fylesystem 119G
 
 mkfs.vfat -F32 /dev/sda1
-mkfs -t btrfs -L archlinux /dev/sda2     // mkfs.btrfs -f -L archlinux /dev/sda2
+mkfs.btrfs -f -L archlinux /dev/sda2
 
 mount -t btrfs -o compress=lzo /dev/sda2 /mnt
 btrfs subvolume create /mnt/@
-btrfs subvolume create /mnt/@home
-#btrfs subvolume create /mnt/@snapshots		// non serve
+btrfs subvolume create /mnt/@home	
 
 umount /mnt
 mount -o compress=lzo,subvol=@ /dev/sda2 /mnt
 mkdir -p /mnt/home
 mount -o compress=lzo,subvol=@home /dev/sda2 /mnt/home
-#mkdir -p /mnt/.snapshots
-#mount -o compress=lzo,subvol=@snapshots /dev/sda2 /mnt/.snapshots
 mkdir -p /mnt/var
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/tmp
@@ -31,61 +27,74 @@ btrfs subvolume create /mnt/tmp
 mkdir -p /mnt/boot
 mount /dev/sda1 /mnt/boot
 
-pacstrap /mnt base base-devel btrfs-progs refind-efi/grub
+wifi-menu
+
+pacstrap /mnt base base-devel btrfs-progs wpa_supplicant dialog
 genfstab -p /mnt >> /mnt/etc/fstab
+# add noatime option (verificare)
+
 arch-chroot /mnt
 
-echo computer_name > /etc/hostname
+echo "computer_name" > /etc/hostname
 ln -s /usr/share/zoneinfo/Europe/Rome /etc/localtime
 
-Uncomment the italian language in /etc/locale.gen and run locale-gen. In /etc/locale.conf, write:
+Uncomment the italian language in /etc/locale.gen and run locale-gen
+In /etc/locale.conf write:
 LANG=it_IT.UTF-8
 LC_COLLATE=C
 
 export LANG=it_IT.UTF-8
 
 nano /etc/vconsole.conf 
-KEYMAP=it
-#font type... vedere guida principianti
+KEYMAP=us
 
 mkinitcpio -p linux
 
 passwd (password root)
 
-###### bootloader (3)
+#grub_UEFI
+pacman -S  grub dosfstools efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck --debug
+
+#workaround xiaomi mi air
+mkdir /boot/EFI/boot
+cp /boot/EFI/arch_grub/grubx64.efi  /boot/EFI/boot/bootx64.efi
+
+grub-mkconfig -o /boot/grub/grub.cfg
 
 exit
 umount -R /mnt
 reboot
 
-### post installazione
 
----------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------
 
-##### bootloader
-
-1. refind
-refind-install --usedefault /dev/sda
-nano /boot/EFI/BOOT/refind.conf
-menuentry Arch Linux {
-    icon /EFI/BOOT/refind/icons/os_arch.png
-    loader /boot/vmlinuz-linux
-    initrd /boot/initramfs-linux.img
-    options "root=/dev/sde2 rootflags=subvol=@"
-}
-
-2. grub https://wiki.archlinux.org/index.php/GRUB_(Italiano)#Istruzioni_specifiche_per_GUID_Partition_Table_.28GPT.29
-grub-install --target=i386-pc --recheck --debug /dev/sda
-
-3. grub_UEFI
-pacman -S  grub dosfstools efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch_grub --recheck --debug
-
-workaround xiaomi mi air
-mkdir /boot/EFI/boot
-cp /boot/EFI/arch_grub/grubx64.efi  /boot/EFI/boot/bootx64.efi
-
-----------------------------------------------------------------
+- Creo la cartella in /mnt/btrfs per montare @;
+# mkdir /mnt/btrfs
+- Monto la radice / dando per scontato che il disco/partizione sia /dev/sda1;
+# mount -t btrfs -o subvol=/ /dev/sda1 /mnt/btrfs/
+- Creo un subvol ove andrò a depositare gli snapshots e lo chiamo snap;
+# btrfs subvolume create /mnt/btrfs/snap
+- Snappo la radice / che sappiamo essere nel subvol @;
+# btrfs subvolume snapshot -r /mnt/btrfs/@ /mnt/btrfs/snap
+- Smonto /mnt/btrfs che sappiamo essere il punto di mount del subvol=/.
+# umount /mnt/btrfs
 
 
-grub-mkconfig -o /boot/grub/grub.cfg
+Ti mostro come faccio quella morte di papa che snappo.
+Codice (Text):
+.1 Ho creato una cartella /mnt;
+# /mnt/btrfs/
+.2 Monto la radice /, non sto lì a montare @ o solo @home, io monto tutto;
+# mount -o subvol=/ /dev/sda3 /mnt/btrfs
+.3 Ho creato un paio di cartelle tanto per avere un po' di ordine;
+# mkdir -p /mnt/btrfs/snap-home /mnt/btrfs/snap-root
+.4 In base a ciò che voglio snappare (@ oppure @home), lancio il comando
+# btrfs subvolume snapshot /home /mnt/btrfs/snap-home/home-$(date +%H.%M-%d-%m-%y)
+oppure
+# btrfs subvolume snapshot / /mnt/btrfs/snap-root/root-$(date +%H.%M-%d-%m-%y)
+.5 Smonto il tutto e tutto scompare;
+# umount /mnt/btrfs
+Il risultato è questo:
+Create a snapshot of '/home' in '/mnt/btrfs/snap-home/home-00.29-06-06-17'
+Create a snapshot of '/' in '/mnt/btrfs/snap-root/root-00.29-06-06-17'
