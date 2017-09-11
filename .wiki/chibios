@@ -1,0 +1,104 @@
+########################################################
+##  												  ##
+## setting up an Eclipse-based IDE for ChibiOS 17.6.0 ##
+##  												  ##
+##   									  v3.0 sep.17 ##
+## 											   bcclsn ##
+##  												  ##  
+########################################################
+
+
+# required software
+- java runtime
+- eclipse ide 
+- gcc arm toolchain
+- openocd
+
+
+# installations and configurations
+1. pacaur -S java-runtime-common eclipse-cpp gcc-arm-none-eabi-bin arm-none-eabi-gdb gnuarmeclipse-openocd-bin stlink chibios*
+2. archlinux-java set java-8-openjdk/jre
+3. sudo chmod -R /usr/src/chibios
+4. launch eclipse and set /usr/src/chibios as initial workspace
+5. help -> check for updates
+6. help -> install new software : select Oxygen (eclipse 4.7) url and install C/C++ GDB hardware debugging from mobile and device development category
+7. window -> references -> run/debug -> openocd
+	executable: openocd
+	folder: /opt/gnuarmeclipse/openocd/bin/
+8. unselect all from window -> preferences -> C/C++ -> code analysis
+9. run -> external tool -> external tools configurations
+	
+	main		name: OpenOCD on ST-Link V2-1 (prompts for .cfg target configuration)
+				location: /opt/gnuarmeclipse/openocd/bin/openocd
+				working directory: /opt/gnuarmeclipse/openocd/bin
+				arguments: -c "telnet_port 4444" -s "/opt/gnuarmeclipse/openocd/scripts" -f "interface/stlink-v2-1.cfg" -f"${file_prompt}"
+	
+	refresh		unselect refresh resources upon completion
+	
+	build		unselect build before lunch
+	common		select local file, external tools, default encoding, allocate console	
+
+
+* pacman -U chibios-17.6.0-0-any.pkg.tar.xz
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PKGBUILD
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Maintainer: Konstantin Oblaukhov <oblaukhov.konstantin@gmail.com>
+# 17.6.0 updated by bcclsn
+
+pkgname=chibios
+pkgver=17.6.0
+pkgrel=1
+pkgdesc="ChibiOS - free embedded RTOS"
+arch=('any')
+license=('GPL')
+url="http://chibios.org"
+source=("https://sourceforge.net/projects/chibios/files/ChibiOS_RT%20stable/Version%20${pkgver}/ChibiOS_${pkgver}.7z")
+md5sums=('27aeafca315242cd71728691a348dd25')
+
+package() {
+    mkdir -p ${pkgdir}/usr/src/chibios
+    cp -r ${srcdir}/ChibiOS_${pkgver}/* ${pkgdir}/usr/src/chibios
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.SRCINFO
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+pkgbase = chibios
+	pkgdesc = ChibiOS - free embedded RTOS
+	pkgver = 17.6.0
+	pkgrel = 1
+	url = http://chibios.org
+	arch = any
+	license = GPL
+	source = https://sourceforge.net/projects/chibios/files/ChibiOS_RT%20stable/Version%2017.6.0/ChibiOS_17.6.0.7z
+	md5sums = 27aeafca315242cd71728691a348dd25
+
+pkgname = chibios
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+STLINK DESKTOP
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Name=ST-Link
+Comment=bcclsn
+Exec=stlink-gui
+Icon=/usr/share/icons/Paper/512x512@2x/apps/cs-cat-hardware.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+Name[it_IT]=ST-Link
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        								
