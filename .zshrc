@@ -81,15 +81,15 @@ source $HOME/.zsh/setopt.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Set tmux for all terminals
-    if [[ -z "$TMUX" ]]; then
-        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
-    if [[ -z "$ID" ]]; then
-       tmux new-session
-    else
-       tmux attach-session -t "$ID"
-    fi
-    fi
+## Set tmux for all terminals
+#    if [[ -z "$TMUX" ]]; then
+#        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
+#    if [[ -z "$ID" ]]; then
+#       tmux new-session
+#    else
+#       tmux attach-session -t "$ID"
+#    fi
+#    fi
 
 # create a directory, then change into it
 
@@ -102,9 +102,10 @@ echo "$fg[cyan] Kernel:    $reset_color $(uname -r)"
 #echo "$fg[cyan] Battery:   $reset_color $(cat /sys/class/power_supply/BAT1/capacity)%"                      
 #echo "$fg[cyan] CPU Temp:  $reset_color $(cut -c 1,2 /sys/class/thermal/thermal_zone0/temp)°C"        
 echo ""
-echo "$fg[cyan] Welcome to ArchLinux: Free as in Freedom, not as in Beer$reset_color"                                   
-echo ""
-echo ""
+#echo "$fg[cyan] Welcome to ArchLinux: Free as in Freedom, not as in Beer $reset_color"                                   
+#echo " $fg[black]███$reset_color$fg[red]███$reset_color$fg[green]███$reset_color$fg[yellow]███$reset_color$fg[blue]███$reset_color$fg[magenta]███$reset_color$fg[cyan]███$reset_color$fg[white]███$reset_color"
+#echo ""
+#echo ""
 ##echo "fine blocco info"
 
 
@@ -113,7 +114,7 @@ echo ""
 #echo "$fg[cyan] Last -Syu: $reset_color $(grep "pacman -Syu" /var/log/pacman.log | tail -n1 | cut -c 2- | cut -c-16)"            
 #echo "$fg[cyan] Kernel:    $reset_color $(uname -r)"  
 #echo ""
-#echo "$fg[cyan] Welcome to Archlinux... GOD Mode$reset_color"                                   
+#echo "$fg[cyan] Welcome to Archlinux... GOD Mode $reset_color"                                   
 #echo ""
 ##echo "fine blocco info - utente root"
 
