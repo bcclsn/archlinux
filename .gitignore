@@ -22,6 +22,8 @@
 .tmux/
 .tor/
 .yaourtrc
+.webclipse/
+.webclipse.properties
 .wget-hsts
 .wine/
 .zcompdump-dreamspark-5.3.1
