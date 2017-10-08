@@ -2,15 +2,15 @@
 ##     						      ##
 ## setting up an Eclipse-based IDE for ChibiOS 17.6.0 ##
 ##  						      ##
-##   					  v3.1 sep.17 ##
+##   					  v3.2 oct.17 ##
 ## 					       bcclsn ##
 ##  					       	      ##  
 ########################################################
 
 
 # required software
-- java runtime
-- eclipse ide 
+- java 8 runtime
+- eclipse (current version: Oxygen 4.7.1 - updated to 08.10.17)
 - gcc arm toolchain
 - openocd
 
@@ -21,20 +21,21 @@
 3. sudo chmod -R /usr/src/chibios
 4. launch eclipse and set /usr/src/chibios as initial workspace
 5. help -> check for updates
-6. help -> install new software : select Oxygen (eclipse 4.7) url and install C/C++ GDB hardware debugging from mobile and device development category
-7. window -> preferences -> run/debug -> openocd
+6. help -> install new software : select Oxygen url and install C/C++ GDB hardware debugging from mobile and device development category
+7. help -> install new software : add GNU ARM Eclipse (http://gnuarmeclipse.sourceforge.net/updates and install GNU ARM C/C++ OpenOCD Debugging
+8. window -> preferences -> run/debug -> openocd
+
 	executable: openocd
 	folder: /opt/gnuarmeclipse/openocd/bin/
-8. unselect all from window -> preferences -> C/C++ -> code analysis
-9. run -> external tool -> external tools configurations
+	
+9. unselect all from window -> preferences -> C/C++ -> code analysis
+10. run -> external tool -> external tools configurations
 	
 	main		name: OpenOCD on ST-Link V2-1 (prompts for .cfg target configuration)
 			location: /opt/gnuarmeclipse/openocd/bin/openocd
 			working directory: /opt/gnuarmeclipse/openocd/bin
 			arguments: -c "telnet_port 4444" -s "/opt/gnuarmeclipse/openocd/scripts" -f "interface/stlink-v2-1.cfg" -f"${file_prompt}"
-	
 	refresh		unselect refresh resources upon completion
-	
 	build		unselect build before lunch
 	common		select local file, external tools, default encoding, allocate console	
 
