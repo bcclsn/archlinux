@@ -31,7 +31,7 @@ wifi-menu
 
 pacstrap /mnt base base-devel btrfs-progs wpa_supplicant dialog
 genfstab -p /mnt >> /mnt/etc/fstab
-## change relatime to noatime option 
+## change relatime to noatime (<option>) 
 
 arch-chroot /mnt
 
