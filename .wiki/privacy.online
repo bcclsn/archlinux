@@ -1,0 +1,46 @@
+-----------------------------------------------------------------------------------------------------------
+MAC SPOOFING
+-----------------------------------------------------------------------------------------------------------
+Method 1: systemd-networkd
+
+systemd-networkd supports MAC address spoofing via link files (see systemd.link(5) for details)
+to set a static spoofed MAC address:
+
+nano /etc/systemd/network/00-default.link
+
+[Match]
+MACAddress=original MAC
+
+[Link]
+MACAddress=spoofed MAC
+NamePolicy=kernel database onboard slot path
+
+to randomize the MAC address on every boot, set MACAddressPolicy=random instead of MACAddress=spoofed MAC
+
+
+
+-----------------------------------------------------------------------------------------------------------
+DNSCrypt
+-----------------------------------------------------------------------------------------------------------
+to configure dnscrypt-proxy, perform the following steps:
+
+select a resolver from /usr/share/dnscrypt-proxy/dnscrypt-resolvers.csv and edit /etc/dnscrypt-proxy.conf, 
+using a short name from the csv file's first column, Name. for example:
+
+ResolverName dnscrypt.eu-nl
+
+after selecting a dnscrypt resolver, modify the resolv.conf file and replace the current set of resolver 
+addresses with address for localhost:
+
+nameserver 127.0.0.1
+
+other programs may overwrite this setting; see resolv.conf#Preserve DNS settings for details.
+start systemd service. finally, start and enable the dnscrypt-proxy.service
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+source:
+1. https://wiki.archlinux.org/index.php/MAC_address_spoofing
+2. https://wiki.archlinux.org/index.php/DNSCrypt
