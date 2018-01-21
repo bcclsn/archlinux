@@ -92,7 +92,7 @@ updating () {
                   if [ "$pkg" = "s" ] ; then
                      cd "$package_dir"/"$package_name"
                      if makepkg -s ; then
-                        echo "Disinstallazione $package_name" ; sudo pacman -R $package_name
+                        #echo "Disinstallazione $package_name" ; sudo pacman -R $package_name
                         echo "Installazione $package_name scaricato" ; sudo pacman -U *.pkg.tar.xz
                         [[ -d "$package_dir_name_old" ]] && echo -n "Rimozione $package_dir_name_old di backup..." && rm -r $package_dir_name_old && echo "fatto."
                         package_pkg=$(find /home/$USER/.cache/AUR/$package_name -type f -name "$package_name*" | grep "pkg.tar.xz") ; mv $package_pkg $package_dir
