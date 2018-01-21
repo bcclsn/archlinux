@@ -97,7 +97,7 @@ updating () {
                         [[ -d "$package_dir_name_old" ]] && echo -n "Rimozione $package_dir_name_old di backup..." && rm -r $package_dir_name_old && echo "fatto."
                         package_pkg=$(find /home/$USER/.cache/AUR/$package_name -type f -name "$package_name*" | grep "pkg.tar.xz") ; mv $package_pkg $package_dir
                         package_pkgbuild=$(find /home/$USER/.cache/AUR/$package_name -type f -name "$package_name*" | grep "PKGBUILD") ; mv $package_pkgbuild $package_dir
-                        rm -r $package_dir_name ; mkdir $package_dir/$package_name
+                        sudo rm -r $package_dir_name ; mkdir $package_dir/$package_name
                         package_pkg=$(find /home/$USER/.cache/AUR -type f -name "$package_name*" | grep "pkg.tar.xz") ; mv $package_pkg $package_dir_name
                         package_pkgbuild=$(find /home/$USER/.cache/AUR -type f -name "$package_name*" | grep "PKGBUILD") ; mv $package_pkg $package_dir_name
                         mv $package_dir/$package_name_tar $package_dir/$package_name
