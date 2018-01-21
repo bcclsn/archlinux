@@ -2,7 +2,7 @@
 ##     						      ##
 ## setting up an Eclipse-based IDE for ChibiOS 17.6.0 ##
 ##  						      ##
-##   					  v3.2 oct.17 ##
+##   					  v3.3 gen.18 ##
 ## 					       bcclsn ##
 ##  					       	      ##  
 ########################################################
@@ -18,7 +18,7 @@
 # installations and configurations
 1. pacaur -S java-runtime-common eclipse-cpp gcc-arm-none-eabi-bin arm-none-eabi-gdb gnuarmeclipse-openocd-bin stlink chibios*
 2. archlinux-java set java-8-openjdk/jre
-3. sudo chmod -R /usr/src/chibios
+3. sudo chmod -R /usr/src/chibios ----- DEPRECATED: set workspace in /home/$USER/
 4. launch eclipse and set /usr/src/chibios as initial workspace
 5. help -> check for updates
 6. help -> install new software : select Oxygen url and install C/C++ GDB hardware debugging from mobile and device development category
@@ -40,7 +40,7 @@
 	common		select local file, external tools, default encoding, allocate console	
 
 
-* pacman -U chibios-17.6.0-0-any.pkg.tar.xz
+* pacman -U chibios-17.6.0-0-any.pkg.tar.xz ----- DEPRECATED: chibios on AUR is now mantained and updated
 
 
 
@@ -67,7 +67,7 @@ package() {
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+NDR: .scrinfo is automatically generated with makepkg --printsrcinfo > .SRCINFO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .SRCINFO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
