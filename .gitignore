@@ -1,3 +1,7 @@
+.STM32Cube/
+.oracle_jre_usage/
+.stm32cubemx/
+.stmcufinder/
 .ICEauthority
 .Skype/
 .bzr.log
