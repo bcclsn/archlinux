@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=System Workbench
+Exec="/usr/src/SystemWorkbench/plugins/fr.ac6.mcu.ide_2.4.0.201801121207/resources/project_importer/linux/System Workbench (project importer)" %U
+MimeType=application/x-SystemWorkbench
+Icon=SystemWorkbench
+Terminal=false
+Type=Application
+Categories=
+Comment=
+
