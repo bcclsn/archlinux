@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Name=STM32CubeMX
+Comment=bcclsn
+Exec=/usr/src/STM32CubeMX/STM32CubeMX
+Icon=/usr/share/icons/Paper/512x512@2x/apps/cs-cat-hardware.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+Name[it_IT]=STM32CubeMX
