@@ -1,13 +1,11 @@
 #!/bin/bash
 ####################################################################################################################
-# Gestione AUR v5.0
-# Script di aggiornamento pacchetti installati da AUR, by rebellion
+# Gestione AUR v5.2
+# Script di aggiornamento/inserimento pacchetti installati da AUR, by rebellion
 #
-# Da lanciare tramite terminale per visualizzare messaggi di dialogo con lo script
-# a es.: gnome-terminal --geometry 75x25 --hide-menubar --title="Gestore AUR" -e 'sh -c "sh /path/to/aur-update"'
-# oppure semplicemente: sh /path/to/aur-update
+# Da lanciare SOLO tramite terminale per visualizzare messaggi di dialogo con lo script
 #
-# Per il manuale d'uso digitare: sh aur-update -h
+# Per il manuale d'uso digitare: (sh )/path/to/file -h
 # Gli aggiornamenti sono organizzati in ~/.cache/AUR/$nomepacchetto dove sono presenti PKGBUILD, pkg compilato
 #  e lo snapshot scaricato .tar.gz
 ####################################################################################################################
@@ -20,8 +18,8 @@ controllo_dipendenze () {
    echo "DIPENDENZE:"
    if [ "$main_dip" != "nessuna" ] ; then
       numero_dipendenze=$(($(grep -o " " <<<"$main_dip" | wc -l)+1))
-      for ((ii=1;ii<=$numero_dipendenze;ii++)) ; do dip=$(echo $main_dip | awk -v xx=$ii '{print$xx}') ; dip=${dip%%>*} ; dip=${dip%%<*} ; dip=${dip%%=*} ; if pacman -Q | grep -w "$dip" 1>/dev/null ; then dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_GREEN}installata${NC}" ; else dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_RED}non installata${NC}" ; fi
-         if pacman -Si "$dip" &>/dev/null ; then dips=$dips"(${LIGHT_WHITE}community${NC})" ; else dips=$dips"(${LIGHT_WHITE}AUR${NC})" ; check_dip_aur="no" ; fi
+      for ((ii=1;ii<=$numero_dipendenze;ii++)) ; do dip=$(echo $main_dip | awk -v xx=$ii '{print$xx}') ; dip=${dip%%>*} ; dip=${dip%%<*} ; dip=${dip%%=*} ; pacmanQ=$(pacman -Q | grep $dip) ; if pacman -Q | grep -w "$dip" 1>/dev/null ; then dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_GREEN}installata${NC}" ; else dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_RED}non installata${NC}" ; fi
+         if pacman -Si "$dip" &>/dev/null ; then dips=$dips"(${LIGHT_WHITE}community${NC})" ; else dips=$dips"(${LIGHT_WHITE}AUR${NC})" ; [[ "$pacmanQ" = "" ]] && check_dip_aur="no" || dips=$dips" (${LIGHT_YELLOW}ma presente come $pacmanQ${NC})" ; fi
          echo -e $dips
       done
    else echo -e "${LIGHT_WHITE}NESSUNA dipendenza richiesta.${NC}"
@@ -38,8 +36,8 @@ controllo_dipendenze () {
    echo -e "\nDIPENDENZE PER LA COMPILAZIONE (MAKE):"
    if [ "$make_dip" != "nessuna" ] ; then
       numero_dipendenze=$(($(grep -o " " <<<"$make_dip" | wc -l)+1))
-      for ((ii=1;ii<=$numero_dipendenze;ii++)) ; do dip=$(echo $make_dip | awk -v xx=$ii '{print$xx}') ; dip=${dip%%>*} ; dip=${dip%%<*} ; dip=${dip%%=*} ; if pacman -Q | grep -w "$dip" 1>/dev/null ; then dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_GREEN}installata${NC}" ; else dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_RED}non installata${NC}" ; fi
-         if pacman -Si "$dip" &>/dev/null ; then dips=$dips"(${LIGHT_WHITE}community${NC})" ; else dips=$dips"(${LIGHT_WHITE}AUR${NC})" ; check_dip_aur="no" ; fi
+      for ((ii=1;ii<=$numero_dipendenze;ii++)) ; do dip=$(echo $make_dip | awk -v xx=$ii '{print$xx}') ; dip=${dip%%>*} ; dip=${dip%%<*} ; dip=${dip%%=*} ; pacmanQ=$(pacman -Q | grep $dip) ; if pacman -Q | grep -w "$dip" 1>/dev/null ; then dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_GREEN}installata${NC}" ; else dips="${LIGHT_WHITE}"$dip"${NC}-----> ${LIGHT_RED}non installata${NC}" ; fi
+         if pacman -Si "$dip" &>/dev/null ; then dips=$dips"(${LIGHT_WHITE}community${NC})" ; else dips=$dips"(${LIGHT_WHITE}AUR${NC})" ; [[ "$pacmanQ" = "" ]] && check_dip_aur="no" || dips=$dips" (${LIGHT_YELLOW}ma presente come $pacmanQ${NC})" ; fi
          echo -e $dips
       done
    else echo -e "${LIGHT_WHITE}NESSUNA dipendenza per la compilazione richiesta.${NC}"
@@ -55,7 +53,7 @@ updating () {
             package_name=$(echo $update | awk -v x=$i '{print$x}')
             echo -e "Installazione ${LIGHT_WHITE}$package_name${NC}:"
             package_name_tar=$package_name".tar.gz" ; echo -en "ricerca ${LIGHT_WHITE}$package_name_tar${NC}..."
-            package_dir_del="/home/$USER/.cache/$package_name"
+            package_name_tar_old=$package_name_tar".old"
             package_dir="/home/$USER/.cache/AUR" ; [[ -d "$package_dir" ]] || mkdir /home/$USER/.cache/AUR
             package_path="/home/$USER/.cache/AUR/$package_name_tar" ; package_path_old=$package_path".old"
             package_dir_name="/home/$USER/.cache/AUR/$package_name"
@@ -69,14 +67,14 @@ updating () {
             controllo_dipendenze
             pkg="n"
             if [ -f "$package_dir/$package_name/PKGBUILD" ] ; then
-               echo ; read -sp "Vuoi consultare il PKGBUILD in locale di $package_name prima di aggiornare? [s/n]" pkg
-               if [ "$pkg" = "s" ] ; then clear ; echo -e "${LIGHT_WHITE}$package_dir/$package_name/PKGBUILD${NC}\n" ; cat $package_dir/$package_name/PKGBUILD ; echo ; read -sp "[Premi invio per continuare]" ; fi
+               echo ; read -p "Vuoi consultare il PKGBUILD in locale di $package_name prima di aggiornare? [s/n]" pkg
+               if [ "$pkg" = "s" ] ; then clear ; echo -e "${LIGHT_WHITE}$package_dir/$package_name/PKGBUILD${NC}\n" ; cat $package_dir/$package_name/PKGBUILD ; premi_invio ; fi
             else
-               echo ; echo -e "${LIGHT_WHITE}PKGBUILD${NC} in $package_dir/$package_name ${LIGHT_WHITE}assente${NC}." ; read -s -p "[Premi invio per continuare]"
+               echo ; echo -e "${LIGHT_WHITE}PKGBUILD${NC} in $package_dir/$package_name ${LIGHT_WHITE}assente${NC}." ; premi_invio
             fi
             if [ "$check_dip_aur" = "ok" ] && dialog --title "pacchetto $package_name" --backtitle "Gestore AUR" --yesno "Verranno installate eventuali dipendenze mancanti presenti in community. Confermi l'aggiornamento?" 7 60 ; then clear
                [[ -d "$package_dir_name" ]] && mv $package_dir_name $package_dir_name_old
-               echo -e "Aggiornamento ${LIGHT_WHITE}"$package_name"${NC} in corso, non spengere il pc o la connessione.\nbackup ${LIGHT_WHITE}"$package_dir_del"${NC}---> fatto\nbackup ${LIGHT_WHITE}"$package_name_tar"${NC}---> fatto"
+               echo -e "Aggiornamento ${LIGHT_WHITE}"$package_name"${NC} in corso, non spengere il pc o la connessione.\nbackup ${LIGHT_WHITE}"$package_dir_name"${NC}---> fatto\nbackup ${LIGHT_WHITE}"$package_name_tar"${NC}---> fatto"
                if wget -P $package_dir https://aur.archlinux.org/cgit/aur.git/snapshot/$package_name_tar ; then
                   tar -xvzf $package_dir/$package_name_tar -C $package_dir
                   read -p "Vuoi consultare il PKGBUILD scaricato? [s/n]" pkg
@@ -90,14 +88,18 @@ updating () {
                      cd "$package_dir"/"$package_name"
                      if makepkg -s ; then
                         echo -e "Disinstallazione ${LIGHT_WHITE}$package_name${NC}" ; sudo pacman -R $package_name
-                        echo -e "Installazione ${LIGHT_WHITE}$package_name${NC} scaricato" ; sudo pacman -U *.pkg.tar.xz
+                        echo -e "Installazione ${LIGHT_WHITE}$package_name${NC} scaricato" ; sudo pacman -U *.pkg.tar.xz --noconfirm
+                        [[ -f "$package_dir_name_old"/"$package_name_tar" ]] && mv "$package_dir_name_old"/"$package_name_tar" /home/$USER/.cache/AUR/$package_name_tar".old"
                         [[ -d "$package_dir_name_old" ]] && echo -en "Rimozione ${LIGHT_WHITE}$package_dir_name_old${NC} di backup..." && rm -r $package_dir_name_old && echo "fatto."
+                        echo -en "Pulizia cartella di compilazione ${LIGHT_WHITE}$package_dir_name${NC}..."
                         package_pkg=$(find /home/$USER/.cache/AUR/$package_name -type f -name "$package_name*" | grep "pkg.tar.xz") ; mv $package_pkg $package_dir
-                        package_pkgbuild=$(find /home/$USER/.cache/AUR/$package_name -type f -name "$package_name*" | grep "PKGBUILD") ; mv $package_pkgbuild $package_dir
+                        pkgbuildnew="PKGBUILDnew" ; mv /home/$USER/.cache/AUR/$package_name/PKGBUILD $package_dir/$pkgbuildnew
                         sudo rm -r $package_dir_name ; mkdir $package_dir/$package_name
                         package_pkg=$(find /home/$USER/.cache/AUR -type f -name "$package_name*" | grep "pkg.tar.xz") ; mv $package_pkg $package_dir_name
-                        package_pkgbuild=$(find /home/$USER/.cache/AUR -type f -name "$package_name*" | grep "PKGBUILD") ; mv $package_pkg $package_dir_name
-                        mv $package_dir/$package_name_tar $package_dir/$package_name
+                        mv /home/$USER/.cache/AUR/$pkgbuildnew $package_dir_name/PKGBUILD
+                        package_targz=$(find /home/$USER/.cache/AUR -type f -name "$package_name*" | grep ".tar.gz") ; mv $package_targz $package_dir_name
+                        [[ -f /home/$USER/.cache/AUR/$package_name_tar_old ]] && mv /home/$USER/.cache/AUR/$package_name_tar_old /home/$USER/.cache/AUR/$package_name
+                        echo -e "${LIGHT_WHITE}fatto${NC}" ; sleep 1
                         dialog --title "pacchetto $package_name" --backtitle "Gestore AUR" --msgbox "Aggiornamento eseguito!" 7 60 ; clear ; risultato=$risultato" "${LIGHT_WHITE}$package_name${NC}"-->${LIGHT_GREEN}installato${NC}\n"
                      else
                         echo "Aggiornamento fallito."
@@ -106,7 +108,7 @@ updating () {
                         [[ -f "$package_dir"/"$package_name_tar" ]] && rm $package_dir/$package_name_tar
                         [[ -d "$package_dir_name_old" ]] && mv $package_dir_name_old $package_dir_name
                         echo "fatto."
-                        read -sp "[Premi invio per continuare]"
+                        premi_invio
                         risultato=$risultato" "${LIGHT_WHITE}$package_name${NC}"-->${LIGHT_RED}non_installato_compilazione_interrotta(make)${NC}\n"
                      fi
                   else
@@ -115,7 +117,7 @@ updating () {
                      rm -r $package_dir/$package_name
                      [[ -f "$package_dir"/"$package_name_tar" ]] && rm $package_dir/$package_name_tar
                      [[ -d "$package_dir_name_old" ]] && mv $package_dir_name_old $package_dir_name
-                     echo "fatto." ; sleep 2
+                     echo "fatto." ; sleep 1
                   fi
                else
                   [[ -d "$package_dir_name_old" ]] && mv $package_dir_name_old $package_dir_name
@@ -131,7 +133,7 @@ updating () {
             risultato=$risultato" "${LIGHT_WHITE}$package_name${NC}"-->${LIGHT_RED}non_installato_per_assenza_connessione_internet${NC}\n"
          fi
       done
-      clear ; echo "Riassunto aggiornamento:" ; echo -e "\n$risultato" ; echo ; echo "[premi invio per terminare]" ; read -s -n 1
+      clear ; echo "Riassunto aggiornamento:" ; echo -e "\n$risultato" ; premi_invio_gnome_term
 }
 installer () {
   echo -en "\n Controllo connessione internet..."
@@ -140,11 +142,11 @@ installer () {
    PACK_locale=$(pacman -Q $PACK 2>/dev/null)
    PACK_aur=$(curl -s "https://aur.archlinux.org/rpc.php?v=5&type=info&arg=$PACK")
    PACK_aur_check=${PACK_aur##*resultcount} ; PACK_aur_check=${PACK_aur_check:2:1}
-   if [ "$PACK_locale" != "" ] ; then pacman -Qi $PACK ; read -sp "[premi invio per continuare]"
+   if [ "$PACK_locale" != "" ] ; then pacman -Qi $PACK ; premi_invio_gnome_term
    else
       case $PACK_aur_check in
          "0")
-            echo -e "${LIGHT_WHITE}$PACK${LIGHT_RED} non presente in AUR.${NC}" ; read -sp "[premi invio per continuare]" ;;
+            echo -e "${LIGHT_WHITE}$PACK${LIGHT_RED} non presente in AUR.${NC}" ; premi_invio_gnome_term ;;
          * )
             aaaa="\"" ; stampa=$(echo $PACK_aur | grep Name) ; [[ "$stampa" != "" ]] && stampa=${PACK_aur##*Name} && stampa=${stampa%%,*} && stampa=${stampa:3} && stampa=${stampa:0: -1} ; echo -e "\nNome                    : ${LIGHT_WHITE}$stampa${NC}"
              stampa=$(echo $PACK_aur | grep Version) ; [[ "$stampa" != "" ]] && stampa=${PACK_aur##*Version} && stampa=${stampa%%,*} && stampa=${stampa:3} && stampa=${stampa:0: -1} ; echo -e "Versione                : ${LIGHT_WHITE}$stampa${NC}"
@@ -180,24 +182,30 @@ installer () {
                   if [ "$pkg" = "s" ] ; then
                      cd /home/$USER/.cache/AUR/$PACK
                      if makepkg -s ; then
-                        package=$(find /home/$USER/.cache/AUR/$PACK -maxdepth 1 -type f -name "*.pkg.tar.xz" | grep "$PACK")
-                        sudo pacman -U /home/$USER/.cache/AUR/$PACK/$package
-                        echo -en "Pulizia cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$PACK${NC}..."
-                        mv /home/$USER/.cache/AUR/$PACK/$package /home/$USER/.cache/AUR/$package
-                        mv /home/$USER/.cache/AUR/$PACK/PKGBUILD /home/$USER/.cache/AUR/PKGBUILD
-                        sudo rm -r /home/$USER/.cache/AUR/$PACK && mkdir /home/$USER/.cache/AUR/$PACK
-                        mv /home/$USER/.cache/AUR/$package /home/$USER/.cache/AUR/$PACK/$package
-                        mv /home/$USER/.cache/AUR/PKGBUILD /home/$USER/.cache/AUR/$PACK/PKGBUILD
-                        echo "fatto." ; echo "Installazione terminata." ; read -p "[Premi invio per terminare]"
+                        package=$(find /home/$USER/.cache/AUR/$PACK -maxdepth 1 -type f -name "*.pkg.tar.xz" | grep "$PACK") ; package=${package##*/} ; package_tar=$(find /home/$USER/.cache/AUR/$PACK -maxdepth 1 -type f -name ".tar.gz" | grep "$PACK") ; package_tar=${package_tar##*/}
+                        if sudo pacman -U /home/$USER/.cache/AUR/$PACK/$package ; then
+                           echo -en "Pulizia cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$PACK${NC}..."
+                           mv /home/$USER/.cache/AUR/$PACK/$package /home/$USER/.cache/AUR/$package
+                           mv /home/$USER/.cache/AUR/$PACK/PKGBUILD /home/$USER/.cache/AUR/PKGBUILD
+                           mv /home/$USER/.cache/AUR/$PACK/package_tar /home/$USER/.cache/AUR/package_tar
+                           sudo rm -r /home/$USER/.cache/AUR/$PACK && mkdir /home/$USER/.cache/AUR/$PACK
+                           mv /home/$USER/.cache/AUR/$package /home/$USER/.cache/AUR/$PACK/$package
+                           mv /home/$USER/.cache/AUR/PKGBUILD /home/$USER/.cache/AUR/$PACK/PKGBUILD
+                           mv /home/$USER/.cache/AUR/package_tar /home/$USER/.cache/AUR/$PACK/package_tar
+                           echo "fatto." ; echo "Installazione terminata." ; premi_invio_gnome_term
+                        else
+                           echo -n "Rimozione cartella di compilazione e snapshot scaricato..."
+                           sudo rm -r /home/$USER/.cache/AUR/$PACK && rm /home/$USER/.cache/AUR/$PACK".tar.gz" ; echo "fatto." ; premi_invio_gnome_term
+                        fi
                      else echo "Installazione fallita."
-                        echo -ne "Rimozione cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$PACK${NC} e $PACK.tar.gz scaricato.." && sudo rm -r /home/$USER/.cache/AUR/$PACK && rm /home/$USER/.cache/AUR/$PACK".tar.gz" && echo "fatto."
+                        echo -ne "Rimozione cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$PACK${NC} e ${LIGHT_WHITE}$PACK.tar.gz${NC} scaricato.." && sudo rm -r /home/$USER/.cache/AUR/$PACK && rm /home/$USER/.cache/AUR/$PACK".tar.gz" && echo "fatto." ; premi_invio_gnome_term
                      fi
                   else echo -ne "Rimozione cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$PACK${NC} e $PACK.tar.gz scaricato.." && sudo rm -r /home/$USER/.cache/AUR/$PACK && rm /home/$USER/.cache/AUR/$PACK".tar.gz" && echo "fatto."
                   fi
                 else dialog --title "Controllo gestione pacchetti (PACMAN)" --backtitle "Gestore AUR" --msgbox "C'è già in esecuzione il gestore pacchetti, attenderne la fine." 7 60
                 fi
                fi
-            else echo -e "\nMancano alcune dipendenze installabili da AUR.\n" ; read -sp "[Premi invio per terminare..]"
+            else echo -e "\nMancano alcune dipendenze installabili da AUR.\n" ; premi_invio_gnome_term
             fi
          ;;
       esac
@@ -205,26 +213,46 @@ installer () {
   else dialog --title "Controllo connessione internet" --backtitle "Gestore AUR" --msgbox "Sembra che manchi la connessione, impossibile proseguire." 7 60
   fi
 }
+remover () {
+   if sudo pacman -R $AUR ; then
+      echo -en "\nRimozione cartella ${LIGHT_WHITE}/home/$USER/.cache/AUR/$AUR${NC}..."
+      rm -r /home/$USER/.cache/AUR/$AUR
+      echo "fatto" ; sleep 1
+   fi
+   premi_invio_gnome_term
+}
 controllo_pacchetto () {
    quit=0 ; for i in $(pacman -Qqm) ; do if [ "$i" = "$AUR" ] ; then quit=1 ; fi ; done
-   [[ $quit -eq 0 ]] && echo -e "$0: pacchetto '${LIGHT_WHITE}$AUR${NC}' non installato." && exit 0
+   [[ $quit -eq 0 ]] && echo -e "$name: pacchetto '${LIGHT_WHITE}$AUR${NC}' non installato." && premi_invio_gnome_term && exit 0
 }
-LIGHT_RED='\033[0;31m' ; LIGHT_GREEN='\033[0;32m' ; LIGHT_WHITE='\033[1;37m' ; NC='\033[0m'
+premi_invio () {
+   echo ; read -sp "[[ Premi invio per continuare... ]]"
+}
+premi_invio_gnome_term () {
+   if [ "$PARENT_COMMAND" = "gnome-terminal-" ] ; then premi_invio ; fi
+}
+PARENT_COMMAND="$(ps -o comm= $PPID)"
+[[ -t 1 ]] && TERMINAL="term" || TERMINAL="no-term"
+if [ "$PARENT_COMMAND" != "bash" ] && [ "$PARENT_COMMAND" != "gnome-terminal-" ] && [ "$PARENT_COMMAND" != "zsh" ] ; then notify-send "ERRORE: avvia il Gestore AUR da 
+terminale." ; exit 0 ; fi
+name=$0 ; name=${name##*/}
+LIGHT_RED='\033[1;31m' ; LIGHT_GREEN='\033[1;32m' ; LIGHT_YELLOW='\033[1;33m' ; LIGHT_WHITE='\033[1;37m' ; NC='\033[0m'
 if pacman -Q dialog &>/dev/null ; then
    if [ "$#" -lt 3 ] ; then
       if [ "$1" = "-p" ] && [ "$2" = "" ] ; then clear ; read -p "Inserisci il pacchetto da aggiornare> " AUR ; numero_AUR=1 ; controllo_pacchetto
-      elif [ "$1" != "-p" ] && [ "$1" != "-i" ] && [ "$1" != "-h" ] && [ "$1" != "" ] ; then echo -e "sh $0: opzione '${LIGHT_WHITE}$1${NC}' non valida.\nsh $0: prova '${LIGHT_WHITE}-h${NC}' per help e info." ; exit 0
+      elif [ "$1" != "-p" ] && [ "$1" != "-i" ] && [ "$1" != "-h" ] && [ "$1" != "" ] && [ "$1" != "-r" ] ; then echo -e "$name: opzione '${LIGHT_WHITE}$1${NC}' non valida.\n$name: prova '${LIGHT_WHITE}-h${NC}' per help e info." ; premi_invio_gnome_term ; exit 0
       elif [ "$1" = "-p" ] && [ "$2" != "" ] ; then AUR=$2 ; numero_AUR=1 ; controllo_pacchetto
       elif [ "$1" = "" ] ; then
          AUR=$(pacman -Qqm)
          numero_AUR=$(pacman -Qqm | wc -l)
-      elif [ "$1" = "-i" ] ; then [[ "$2" = "" ]] && read -p "Inserisci il pacchetto AUR da installare> " PACK || PACK=$2 ; installer ; echo -e "\n${LIGHT_GREEN}*****$0 terminato*****${NC}" && sleep 2 ; exit 0
-      elif [ "$1" = "-h" ] ; then clear ; echo -e "MANUALE $0:\n\n${LIGHT_WHITE}NOME E DESCRIZIONE${NC}\n   $0 - utility aggiornamento/installazione pacchetti AUR\n\n${LIGHT_WHITE}SINOSSI${NC}\n   ${LIGHT_WHITE}Uso${NC}\n      sh $0 [OPZIONI] [nomepacchetto]\n\n${LIGHT_WHITE}OPZIONI\n   -p,${NC}      aggiornamento con richiesta del nomepacchetto\n\n${LIGHT_WHITE}   -p NOMEPACCHETTO,\n${NC}      aggiornamento NOMEPACCHETTO\n\n${LIGHT_WHITE}   -i,${NC}\n      installazione con richiesta del nomepacchetto\n\n${LIGHT_WHITE}   -i NOMEPACCHETTO,\n${NC}      installazione NOMEPACCHETTO\n\n\n${LIGHT_GREEN}*****SOFTWARE BY REBELLION, FREE AND WITHOUT LICENSE*****${NC}" ; exit 0
+      elif [ "$1" = "-i" ] ; then [[ "$2" = "" ]] && read -p "Inserisci il pacchetto AUR da installare> " PACK || PACK=$2 ; installer ; echo -e "\n${LIGHT_GREEN}*****$name terminato*****${NC}" && sleep 2 ; exit 0
+      elif [ "$1" = "-r" ] ; then [[ "$2" = "" ]] && read -p "Inserisci il pacchetto da rimuovere> " AUR || AUR="$2" ; controllo_pacchetto ; remover ; exit 0
+      elif [ "$1" = "-h" ] ; then clear ; echo -e "MANUALE $name:\n\n${LIGHT_WHITE}NOME E DESCRIZIONE${NC}\n   $name - utility aggiornamento/installazione pacchetti AUR\n\n${LIGHT_WHITE}SINOSSI${NC}\n   ${LIGHT_WHITE}Uso${NC}\n      $name [OPZIONI] [nomepacchetto]\n\n${LIGHT_WHITE}OPZIONI\n   -p,\n${NC}      aggiornamento con richiesta del nomepacchetto\n\n${LIGHT_WHITE}   -p NOMEPACCHETTO,\n${NC}      aggiornamento NOMEPACCHETTO\n\n${LIGHT_WHITE}   -i,${NC}\n      installazione con richiesta del nomepacchetto\n\n${LIGHT_WHITE}   -i NOMEPACCHETTO,\n${NC}      installazione NOMEPACCHETTO\n\n${LIGHT_WHITE}   -r,${NC}\n      rimozione con richiesta del nomepacchetto\n\n${LIGHT_WHITE}   -r NOMEPACCHETTO,\n${NC}      rimozione NOMEPACCHETTO\n\n${LIGHT_WHITE}   -h,\n${NC}      manuale d'uso\n\n\n${LIGHT_GREEN}*****SOFTWARE BY REBELLION, FREE AND WITHOUT LICENSE*****${NC}" ; premi_invio_gnome_term ; exit 0
       else exit 0
       fi
-   else echo -e "sh $0: troppi argomenti -- ${LIGHT_WHITE}$@${NC}.\nsh $0: prova '${LIGHT_WHITE}-h${NC}' per help e info." ; exit 0
+   else echo -e "$name: troppi argomenti -- ${LIGHT_WHITE}$@${NC}.\n$name: prova '${LIGHT_WHITE}-h${NC}' per help e info." ; premi_invio_gnome_term ; exit 0
    fi
-   if [ "$(pacman -Qqm | grep -w "$AUR")" = "" ] ; then echo -e "sh $0: pacchetto ${LIGHT_WHITE}$AUR${NC} non trovato." ; exit 0 ; fi
+   if [ "$(pacman -Qqm | grep -w "$AUR")" = "" ] ; then echo -e "$name: pacchetto ${LIGHT_WHITE}$AUR${NC} non trovato." ; premi_invio_gnome_term ; exit 0 ; fi
    check=$(ps aux | grep "[s]udo pacman")
    if [ "$check" = "" ] ; then
       clear && echo -n "Controllo connessione internet..."
@@ -277,11 +305,11 @@ if pacman -Q dialog &>/dev/null ; then
       fi
    else dialog --title "Controllo gestione pacchetti (PACMAN)" --backtitle "Gestore AUR" --msgbox "C'è già in esecuzione il gestore pacchetti, attenderne la fine." 7 60
    fi
-else echo -e "\nsh $0: manca il pacchetto ${LIGHT_WHITE}dialog${NC}, vuoi installarlo (non richiede dipendenze)? [s=si/altro=no]" ; read dialogo
+else echo -e "\nsh $name: manca il pacchetto ${LIGHT_WHITE}dialog${NC}, vuoi installarlo (non richiede dipendenze)? [s=si/altro=no]" ; read dialogo
    case $dialogo in
       "s")
          sudo pacman -S dialog ;;
    esac
 fi
-clear ; echo -e "${LIGHT_GREEN}*****$0 terminato*****${NC}" && sleep 2
+clear ; echo -e "${LIGHT_GREEN}*****$name terminato*****${NC}" && sleep 1
 exit 0
