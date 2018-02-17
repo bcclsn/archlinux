@@ -87,7 +87,7 @@ updating () {
                   if [ "$pkg" = "s" ] ; then
                      cd "$package_dir"/"$package_name"
                      if makepkg -s ; then
-                        echo -e "Disinstallazione ${LIGHT_WHITE}$package_name${NC}" ; sudo pacman -R $package_name
+                        #echo -e "Disinstallazione ${LIGHT_WHITE}$package_name${NC}" ; sudo pacman -R $package_name
                         echo -e "Installazione ${LIGHT_WHITE}$package_name${NC} scaricato" ; sudo pacman -U *.pkg.tar.xz --noconfirm
                         [[ -f "$package_dir_name_old"/"$package_name_tar" ]] && mv "$package_dir_name_old"/"$package_name_tar" /home/$USER/.cache/AUR/$package_name_tar".old"
                         [[ -d "$package_dir_name_old" ]] && echo -en "Rimozione ${LIGHT_WHITE}$package_dir_name_old${NC} di backup..." && rm -r $package_dir_name_old && echo "fatto."
