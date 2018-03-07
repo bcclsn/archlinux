@@ -11,6 +11,7 @@ STM32Cube/
 .esd_auth
 .gitconfig
 .gnupg/
+.gtktermrc
 .java/
 .kodi/
 .local/
