@@ -6,6 +6,7 @@ STM32Cube/
 .Skype/
 .bzr.log
 .cache/
+.chmsee/
 .config/
 .eclipse/
 .esd_auth
