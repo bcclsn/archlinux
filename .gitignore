@@ -1,4 +1,5 @@
 STM32Cube/
+.ac6/
 .oracle_jre_usage/
 .stm32cubemx/
 .stmcufinder/
