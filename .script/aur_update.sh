@@ -119,7 +119,7 @@ updating () {
                   echo ; read -p "Confermi l'aggiornamento? [s/n]" pkg
                   if [ "$pkg" = "s" ] ; then
                      echo "Compilazione (makepkg) in corso..."
-					 cd /home/$USER/.cache/AUR/$PACK
+					 cd /home/$USER/.cache/AUR/$package_name
 					 if makepkg -s ; then
                         tput cuu 1 ; echo "Compilazione (makepkg) terminata con successo."
                         echo -e "Installazione ${LIGHT_WHITE}$package_name${NC} scaricato" ; sudo pacman -U *.pkg.tar.xz --noconfirm
