@@ -47,9 +47,7 @@
 .local/share/TelegramDesktop/
 .local/share/Trash/
 .local/share/applications/SystemWorkbench.desktop
-.local/share/applications/gtkterm.desktop
 .local/share/applications/mimeinfo.cache
-.local/share/applications/stlink.desktop
 .local/share/desktop-directories/
 .local/share/epiphany/
 .local/share/gnome-settings-daemon/
@@ -100,7 +98,3 @@ Desktop/
 Documenti/
 Downloads/
 Immagini/
-SD_CAN-STM32F407G-DISC1/
-en.stm32cubef4/
-en.stm32cubef7/
-
