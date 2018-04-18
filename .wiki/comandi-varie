@@ -9,5 +9,8 @@ add pod2man to path: PATH=$PATH:/usr/bin/core_perl
 2. dd if= of= status=progress
 
 ##
-sudo cat /dev/ttyACM0 1&> temp.txt
-watch tail -n 10 temp.txt
+sudo cat /dev/ttyACM0 1&> temp.txt		// acquisisce da seriale
+watch tail -n 10 temp.txt			// contemporaneamente mostra (su 
+altro terminale) le ultime 10 acquisizioni
+
+wc -l temp.txt					// conta le righe del file
