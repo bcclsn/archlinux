@@ -10,6 +10,6 @@ add pod2man to path: PATH=$PATH:/usr/bin/core_perl
 
 ##
 sudo cat /dev/ttyACM0 1&> temp.txt		// acquisisce da seriale
-watch .n 0.5 tail -n 10 temp.txt		// contemporaneamente mostra (su altro terminale) le ultime 10 acquisizioni, ogni 0.5 sec
+watch -n 0.5 tail -n 10 temp.txt		// contemporaneamente mostra (su altro terminale) le ultime 10 acquisizioni, ogni 0.5 sec
 
 wc -l temp.txt					// conta le righe del file
