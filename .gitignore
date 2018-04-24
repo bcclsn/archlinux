@@ -1,3 +1,5 @@
+.matlab/
+.subversion/
 .ICEauthority
 .STM32Cube/
 .ac6/
