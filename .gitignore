@@ -1,3 +1,4 @@
+.atom/
 .matlab/
 .subversion/
 .ICEauthority
@@ -5,6 +6,8 @@
 .ac6/
 .cache/
 .chmsee/
+.config/Atom/
+.config/Electron/
 .config/DNSCryptClient/
 .config/Notepadqq/
 .config/Pinta/
