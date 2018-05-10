@@ -72,7 +72,7 @@ reboot
 - Creo la cartella in /mnt/btrfs per montare @;
 # mkdir /mnt/btrfs
 - Monto la radice / dando per scontato che il disco/partizione sia /dev/sda1;
-# mount -t btrfs -o subvol=/ /dev/sda1 /mnt/btrfs/
+# mount -t btrfs -o compress=lzo,subvol=/ /dev/sda1 /mnt/btrfs/
 - Creo un subvol ove andrò a depositare gli snapshots e lo chiamo snap;
 # btrfs subvolume create /mnt/btrfs/snap
 - Snappo la radice / che sappiamo essere nel subvol @;
@@ -86,7 +86,7 @@ Codice (Text):
 .1 Ho creato una cartella /mnt;
 # /mnt/btrfs/
 .2 Monto la radice /, non sto lì a montare @ o solo @home, io monto tutto;
-# mount -o subvol=/ /dev/sda3 /mnt/btrfs
+# mount -o comprezz=lzo,subvol=/ /dev/sda3 /mnt/btrfs
 .3 Ho creato un paio di cartelle tanto per avere un po' di ordine;
 # mkdir -p /mnt/btrfs/snap-home /mnt/btrfs/snap-root
 .4 In base a ciò che voglio snappare (@ oppure @home), lancio il comando
