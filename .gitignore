@@ -1,3 +1,5 @@
+.histfile
+.zcompdump
 .dbus/
 .atom/
 .matlab/
