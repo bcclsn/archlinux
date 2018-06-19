@@ -20,7 +20,7 @@ to randomize the MAC address on every boot, set MACAddressPolicy=random instead 
 
 
 -----------------------------------------------------------------------------------------------------------
-DNSCrypt
+DNSCrypt -- deprecated
 -----------------------------------------------------------------------------------------------------------
 to configure dnscrypt-proxy, perform the following steps:
 
