@@ -24,7 +24,7 @@ source $HOME/.zsh/setopt.zsh
 
 ##echo "inizio blocco info"
 echo ""
-echo "$fg[cyan] Last -Syu: $reset_color $(grep "pacman -S -y -u" /var/log/pacman.log | tail -n1 | cut -c 2- | cut -c-16)"
+echo "$fg[cyan] Last -Syu: $reset_color $(grep "pacman -Syu" /var/log/pacman.log | tail -n1 | cut -c 2- | cut -c -16)"
 echo "$fg[cyan] Kernel:    $reset_color $(uname -r)"
 #echo "$fg[cyan] HDD:      $reset_color $(df -h | grep "/dev/sda1" | cut -c 23- | cut -c-4)/$(df -h | grep "/dev/sda1" | cut -c 18- | cut -c-3)"
 #echo "$fg[cyan] RAM:       $reset_color $(free -m | grep "Mem:" | cut -c 28- | cut -c -4)/$(free -m | grep "Mem:" | cut -c 16- | cut -c -4)"
