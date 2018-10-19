@@ -24,6 +24,7 @@
 .p2/
 .pki/
 .pyload/
+.qucs/
 .ssh/
 .stm32cubemx/
 .stm32cubeup/
