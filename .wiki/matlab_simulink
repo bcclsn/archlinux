@@ -1,0 +1,36 @@
+# matlab simulink error
+
+###############################################################################################
+
+I got a reply from MathWorks support. The problem is because Matlab fails to load the font display $MATLAB/bin/glnxa64/libfreetype.so.6
+
+The problem was be solved by creating an 'exclude' folder in $MATLAB/bin/glnxa64/ and moving libfreetype.so.6 to that folder.
+
+In my case, I performed the following:
+
+$ cd  /usr/local/MATLAB/R2017b # Matlab directory
+$ cd bin/glnxa64
+$ mkdir exclude
+$ mv libfreetype* exclude
+$ cd ../../sys/os/glnxa64
+$ mkdir exclude
+$ mv libstdc++.so.6* exclude
+$ cd
+
+###############################################################################################
+
+>> cd(matlabroot)
+>> ! bin/glnxa64/MATLABWindow
+
+If you see:
+bin/glnxa64/MATLABWindow: symbol lookup error: _somelibrary_: undefined symbol: g_log_structured_standard 
+
+Then you should:
+Set aside MATLAB’s copy of the libglib-2.0.so library, located in <matlabroot>/cefclient/sys/os/glnxa64.
+
+# cd /usr/local/MATLAB/R2017b   (or wherever you may have installed MATLAB)
+# cd cefclient/sys/os/glnxa64   (or whichever directory is indicated in above table)
+# mkdir exclude
+# mv libglib-2.0.so* exclude/   (or whichever library is indicated in above table)
+
+###############################################################################################
