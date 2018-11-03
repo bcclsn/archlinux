@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=2018a
+Type=Application
+Terminal=false
+MimeType=text/x-matlab
+Exec=matlab -desktop -nosplash
+Name=MATLAB
+Icon=/home/bcclsn/Downloads/matlab_logo.png
+Categories=Development;Math;Science
+Comment=Scientific computing environment
+StartupNotify=true
