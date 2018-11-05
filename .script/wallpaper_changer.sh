@@ -1,9 +1,20 @@
 #!/bin/bash
 
-wallpaperdir='/home/bcclsn/Immagini/wallpaper'  							#impostare la cartella con gli sfondi desktop
+# set the folder providing the wallpapers #
+wallpaperdir='/home/bcclsn/Immagini/wallpaper'
 files=($wallpaperdir/*)
+
+# choose random wallpaper and set as desktop background #
 randompic=`printf "%s\n" "${files[RANDOM % ${#files[@]}]}"`
 gsettings set org.gnome.desktop.background picture-uri $randompic
-sleep 7200												#impostare il delay per il cambio sfondo (2h = 7200s)
-exec $0 												#Avvia una nuova istanza di se stesso impostato sul delay
-exit 0 													#Questo comando non verrà mai eseguito :P
+
+# set the delay (2h = 7200s) #
+sleep 7200
+
+# start a new self-instance using the previous delay #
+exec $0
+exit 0 													# questo comando non verrà mai eseguito :P
+
+################################################
+##                                bcclsn v1.0 ##
+################################################
