@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=2018a
 Type=Application
-Terminal=false
+Terminal=true
 MimeType=text/x-matlab
 Exec=/home/bcclsn/.script/matlab.sh
 Name=MATLAB
