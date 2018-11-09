@@ -6,7 +6,7 @@ curr_mac=$(ip link show enp6s0 | \
 matl_mac="66:B7:7E:76:58:9E"
 
 # spoofing mac address #
-if (zenity --password --title "password request" | \
+if (zenity --password --title "MAC Spoofing" | \
     sudo -S ip link set dev enp6s0 down & \
     sudo -S ip link set dev enp6s0 address $matl_mac & \
     sudo -S ip link set dev enp6s0 up) ; then
@@ -22,8 +22,9 @@ if (zenity --password --title "password request" | \
 
 # get error #
 else
-    zenity --warning --title "error" \
-	             --text "password sbagliata"
+    zenity --error --title "Error" \
+	           --text "Password sbagliata!" \
+		   --width=150 --height=80
 fi
 
 # clear sudo cache and exit #
@@ -31,5 +32,5 @@ sudo -k
 exit 0
 
 ################################################
-##                                bcclsn v2.2 ##
+##                                bcclsn v2.3 ##
 ################################################
