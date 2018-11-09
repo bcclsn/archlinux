@@ -2,7 +2,7 @@
 
 # get current mac address and define matlab one #
 curr_mac=$(ip link show enp6s0 | \
-	         grep "ether" | cut -c 16- | cut -c -17)
+           grep "ether" | cut -c 16- | cut -c -17)
 matl_mac="66:B7:7E:76:58:9E"
 
 # spoofing mac address #
@@ -23,7 +23,7 @@ if (zenity --password --title "password request" | \
 # get error #
 else
     zenity --warning --title "error" \
-	                   --text "password sbagliata"
+	             --text "password sbagliata"
 fi
 
 # clear sudo cache and exit #
