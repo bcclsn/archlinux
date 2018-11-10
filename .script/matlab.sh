@@ -13,12 +13,15 @@ sudo -S ip link set dev wlp1s0 up
 tmux new-session -d -s matlab 'matlab -desktop'
 sleep 20
 
-# restore previous address and exit #
+# restore previous address #
 sudo -S ip link set dev wlp1s0 down
 sudo -S ip link set dev wlp1s0 address $curr_mac
 sudo -S ip link set dev wlp1s0 up
+
+# clear sudo cache and exit #
+sudo -k
 exit 0
 
 ################################################
-##                                bcclsn v2.1 ##
+##                              bcclsn v2.1.1 ##
 ################################################
