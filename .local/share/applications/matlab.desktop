@@ -11,3 +11,5 @@ Icon=/home/bcclsn/Downloads/matlab_logo.png
 Categories=Development;Math;Science
 Comment=Scientific computing environment
 StartupNotify=true
+
+## terminal false with zenity script
