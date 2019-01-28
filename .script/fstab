@@ -1,0 +1,15 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	        <dir>	        <type>	        <options>   		                                             					<dump>	<pass>
+#
+# 11 ott 2017
+#
+# UUID=038bc12a-a751-4264-8861-20cbe428e5ca LABEL=archlinux
+/dev/sda2           	/         	btrfs     	rw,noatime,compress=lzo,ssd,space_cache,subvol=/@,subvol=@						0 	0
+
+# UUID=038bc12a-a751-4264-8861-20cbe428e5ca LABEL=archlinux
+/dev/sda2           	/home     	btrfs     	rw,noatime,compress=lzo,ssd,space_cache,subvol=/@home,subvol=@home					0 	0
+
+# UUID=BF0E-A07C
+/dev/sda1           	/boot     	vfat      	rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro	0 	2
