@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# WARNING!!! IT'S ONLY AN ALPHA VERSION
+#            SCRIPT NOT VERIFIED
+#            USE IT AT YOUR RISK
+
 # mount snapshot folder #
 mount -t btrfs -o compress=lzo,subvol=/ /dev/sda2 /mnt/btrfs
 
