@@ -15,7 +15,8 @@ btrfs subvolume delete "$(ls -1 | head -n -2)"
 cd ~/
 
 # update grup.cfg (grub-btrfs) #
-grub-mkconfig -o /boot/grub/grub.cfg
+# enable if you use the script standalone
+#grub-mkconfig -o /boot/grub/grub.cfg
 
 # umount and exit
 umount /mnt/btrfs
