@@ -12,13 +12,15 @@ cd /mnt/btrfs/snap-root
 btrfs subvolume delete "$(ls -1 | head -n -2)"
 cd /mnt/btrfs/snap-home
 btrfs subvolume delete "$(ls -1 | head -n -2)"
-cd ../..
+cd ~/
 
-# umount
+# update grup.cfg (grub-btrfs) #
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# umount and exit
 umount /mnt/btrfs
-
 exit 0
 
 ################################################
-##                                bcclsn v1.0 ##
+##                                bcclsn v1.1 ##
 ################################################
