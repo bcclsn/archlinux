@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# WARNING!!! IT'S ONLY AN ALPHA VERSION
-#            SCRIPT NOT VERIFIED
+# WARNING!!! IT'S ONLY AN BETA VERSION
 #            USE IT AT YOUR RISK
 
 # mount snapshot folder #
