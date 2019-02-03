@@ -1,0 +1,6 @@
+[Unit]
+Description=Backup Settimanale
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /home/bcclsn/.script/backup.sh 
