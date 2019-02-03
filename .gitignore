@@ -50,3 +50,4 @@ Immagini/
 .thumbnails/
 .zenmap/
 .xournal
+.script/backup.sh
