@@ -12,8 +12,7 @@ umount /mnt/btrfs
 
 # launch btrfs_delete.sh script #
 # autoremove old snapshot excluding the last two
-## ALPHA VERSION! ENABLE AT YOUR RISK
-#sh /home/bcclsn/.script/btrfs_delete.sh
+sh /home/bcclsn/.script/btrfs_delete.sh
 
 # update grub.cfg (grub-btrfs) and exit #
 grub-mkconfig -o /boot/grub/grub.cfg
