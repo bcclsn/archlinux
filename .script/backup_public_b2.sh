@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# backblaze b2 #
 # setting the confidential variables #
 export PASSPHRASE="insert here your passphrase"
 ACCOUNT_ID="insert here your account id"
