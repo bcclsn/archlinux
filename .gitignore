@@ -51,3 +51,4 @@ Immagini/
 .zenmap/
 .xournal
 .script/backup_b2.sh
+.script/backup_mega.sh
