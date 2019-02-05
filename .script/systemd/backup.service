@@ -3,4 +3,5 @@ Description=Backup Settimanale
 
 [Service]
 Type=oneshot
+User=bcclsn
 ExecStart=/usr/bin/bash /home/bcclsn/.script/backup_mega.sh 
