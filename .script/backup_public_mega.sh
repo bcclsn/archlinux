@@ -22,7 +22,10 @@ duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR
 #duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RESTORE_DIR
 
 # notify #
-notify-send duplicity "backup completato" -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg -t 60000
+notify-send "duplicity" \
+            "backup completato" \
+            -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg \
+            -t 60000
 
 ################################################
 ##                                bcclsn v1.1 ##
