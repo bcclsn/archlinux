@@ -21,9 +21,9 @@ duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR
 #RESTORE_DIR=
 #duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RESTORE_DIR
 
-# unsetting the confidential variables #
-unset PASSPHRASE
+# notify #
+notify-send duplicity "backup completato" -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg -t 60000
 
 ################################################
-##                                bcclsn v1.0 ##
+##                                bcclsn v1.1 ##
 ################################################
