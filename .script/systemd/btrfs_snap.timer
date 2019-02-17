@@ -3,6 +3,7 @@ Description=Snap Settimanale - Ogni Venerdì alle 00:00:00
 
 [Timer]
 OnCalendar=Fri *-*-* 00:00:00
+Unit=btrfs_snap.timer
 Persistent=true
 
 [Install]
