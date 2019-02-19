@@ -17,7 +17,7 @@ cd ~/
 # enable if you use the script standalone
 #grub-mkconfig -o /boot/grub/grub.cfg
 
-# umount and exit
+# umount and exit #
 umount /mnt/btrfs
 exit 0
 
