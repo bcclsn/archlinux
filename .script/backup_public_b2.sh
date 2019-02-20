@@ -21,11 +21,12 @@ duplicity remove-all-but-n-full 2 --force b2://$ACCOUNT_ID:$APP_KEY@$BUCKETS
 #duplicity restore b2://$ACCOUNT_ID:$APP_KEY@$BUCKETS $RESTORE_DIR
 
 # notify #
-notify-send "duplicity" \
-            "backup completato" \
-            -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg \
-            -t 60000
+#notify-send "duplicity" \
+#            "backup completato" \
+#            -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg \
+#            -t 60000
+zenity --notification --text "backup completato"
 
 ################################################
-##                                bcclsn v1.1 ##
+##                                bcclsn v1.2 ##
 ################################################
