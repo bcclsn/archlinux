@@ -26,7 +26,10 @@ duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR
 #            "backup completato" \
 #            -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg \
 #            -t 60000
-zenity --notification --text "backup completato"
+zenity --info --width=150 --height=80 \
+       --title "duplicity" \
+       --text "backup completato" \
+       --timeout=6 2> /dev/null
 
 ################################################
 ##                                bcclsn v1.2 ##
