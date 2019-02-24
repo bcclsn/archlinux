@@ -32,19 +32,19 @@ if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/n
    #            "backup completato" \
    #            -i /usr/share/icons/Adwaita/scalable/apps/system-file-manager-symbolic.svg \
    #            -t 60000
-   zenity --info --width=150 --height=80 \
+   export DISPLAY=:0 && zenity --info --width=150 --height=80 \
           --title "duplicity" \
           --text "backup completato" \
           --timeout=6 2> /dev/null
 
+else
    # get error #
-   else
-       zenity --warning --width=180 --height=80 \
-              --title "assenza connessione" \
-              --text "il backup verrà rimandato" \
-              --timeout=6 2> /dev/null               
+   export DISPLAY=:0 && zenity --warning --width=180 --height=80 \
+          --title "assenza connessione" \
+          --text "il backup verrà rimandato" \
+          --timeout=6 2> /dev/null
 fi
 
 ################################################
-##                                bcclsn v1.3 ##
+##                                bcclsn v1.4 ##
 ################################################
