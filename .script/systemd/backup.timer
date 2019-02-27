@@ -2,7 +2,6 @@
 Description=Backup Giornaliero
 
 [Timer]
-OnBootSec=60
 OnCalendar=*-*-* 09:00:00
 Unit=backup.service
 Persistent=true
