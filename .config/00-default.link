@@ -1,0 +1,6 @@
+[Match]
+MACAddress=A0:C5:89:2E:89:7F MAC
+
+[Link]
+MACAddressPolicy=random
+NamePolicy=kernel database onboard slot path
