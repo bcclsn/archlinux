@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# mega #
+# emulate OnBootSec monotonic timer option #
+sleep 2m
+
 # check connection #
 if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/null) ; then
 
@@ -46,5 +48,5 @@ else
 fi
 
 ################################################
-##                                bcclsn v1.4 ##
+##                                bcclsn v1.5 ##
 ################################################
