@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# emulate OnBootSec monotonic timer option #
-sleep 2m
+# manual OnBootSec monotonic timer option #
+while true ; do OnBootSec=$(cat /proc/uptime | awk '{print $1}') ; if [ ${OnBootSec%.*} -gt 60 ] ; then break ; fi ; done
 
 # check connection #
 if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/null) ; then
