@@ -43,7 +43,7 @@ else
    # get error #
    export DISPLAY=:0 && zenity --warning --width=180 --height=80 \
           --title "assenza connessione" \
-          --text "il backup verrà rimandato" \
+          --text "il backup verrà saltato" \
           --timeout=6 2> /dev/null
 fi
 
