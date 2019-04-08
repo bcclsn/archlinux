@@ -15,6 +15,9 @@ if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/n
    DIR="set the directory that you would to backup"
    MDIR="set the mega directory"
 
+   # timestamp #
+   date >> ~/.log/duplicity.log
+
    # doing a monthly full backup (1M) #
    duplicity --full-if-older-than 1M --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> ~/.log/duplicity.log
 
@@ -44,5 +47,5 @@ else
 fi
 
 ################################################
-##                                bcclsn v1.6 ##
+##                                bcclsn v1.7 ##
 ################################################
