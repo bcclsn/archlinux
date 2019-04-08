@@ -55,3 +55,4 @@ Immagini/
 .script/backup_mega.sh
 .arduinocdt/
 .tooling/
+.log/
