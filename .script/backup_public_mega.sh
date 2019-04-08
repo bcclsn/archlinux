@@ -16,6 +16,7 @@ if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/n
    MDIR="set the mega directory"
 
    # timestamp #
+   echo "" >> ~/.log/duplicity.log
    date >> ~/.log/duplicity.log
 
    # doing a monthly full backup (1M) #
