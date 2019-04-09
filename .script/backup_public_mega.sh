@@ -24,9 +24,6 @@ if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/n
    duplicity --full-if-older-than 1M --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> $LOG
 
    # deleting full backups older than 2 months (2) #
-   duplicity --full-if-older-than 1M --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> $LOG
-
-   # deleting full backups older than 2 months (2) #
    duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR >> $LOG
 
    # to restore a folder from your backup #
