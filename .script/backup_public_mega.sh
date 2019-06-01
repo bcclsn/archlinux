@@ -21,7 +21,7 @@ if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/n
    date >> $LOG
 
    # doing a monthly full backup (1M) #
-   duplicity --full-if-older-than 1M --exclude ~/.local/share/Trash ~/.cache --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> $LOG
+   duplicity --full-if-older-than 1M --exclude ~/.local/share/Trash --exclude ~/.cache --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> $LOG
 
    # deleting full backups older than 2 months (2) #
    duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR >> $LOG
@@ -49,5 +49,5 @@ else
 fi
 
 ################################################
-##                                bcclsn v1.8 ##
+##                                bcclsn v1.9 ##
 ################################################
