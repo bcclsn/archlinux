@@ -8,16 +8,14 @@
                transistor e pin gpio
  ============================================================================
  */
-
-#include <stdio.h>
-#include <stdlib.h>
 #include <wiringPi.h>
 
 #define FTEMP     "/sys/class/thermal/thermal_zone0/temp"
-#define THRESHOLD 60000
+#define THRESHOLD 60000                                               // first two MSD (degree)
+#define FORCED_ON 12                                                  // 12 cycle
 #define GPIO_PIN  1
 
-int os_read_d(char  *fname) {
+int os_read_d(char  *fname) {                                         // thanks to vbextreme
   FILE* fd = fopen(fname, "r");
 
   if (fd == NULL) {
@@ -31,6 +29,7 @@ int os_read_d(char  *fname) {
 
 void main(void) {
    int temperature;
+   int counter = 0;
 
    wiringPiSetup();
    pinMode(GPIO_PIN, OUTPUT);
@@ -39,11 +38,13 @@ void main(void) {
       temperature = os_read_d(FTEMP);
 
       if (temperature >= THRESHOLD) {
-         digitalWrite(GPIO_PIN, HIGH);
-         //printf("fan on \n");
-      } else {
-         digitalWrite(GPIO_PIN, LOW);
-         //printf("fan off \n");
+         digitalWrite(GPIO_PIN, HIGH);                                 // start the fan
+         counter = 0;                                                  // reset the counter
+      } else {                                                         // else if temperature is under the threshold
+         counter++;                                                    // start the counter
+         if (counter>FORCED_ON) {                                      // after 12 cycle under the threshold (cycle * delay = one minute)
+            digitalWrite(GPIO_PIN, LOW);                               // stop the fan
+         }
       }
       delay(5000);
    }
