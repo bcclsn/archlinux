@@ -20,7 +20,7 @@
 int os_read_d(char  *fname) {
   FILE* fd = fopen(fname, "r");
 
-  if(fd == NULL) {
+  if (fd == NULL) {
     return -1;
   }
   char inp[64];
