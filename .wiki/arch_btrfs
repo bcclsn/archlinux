@@ -7,7 +7,7 @@
 cfdisk /dev/sda
 
 /dev/sda1 EFI System 256M
-/dev/sda2 Linux fylesystem 119G
+/dev/sda2 Linux filesystem 119G
 
 mkfs.vfat -F32 /dev/sda1
 mkfs.btrfs -f -L archlinux /dev/sda2
