@@ -4,8 +4,8 @@
 mount -t btrfs -o compress=lzo,subvol=/ /dev/sda2 /mnt/btrfs
 
 # get the snapshot #
-btrfs subvolume snapshot /mnt/btrfs/@ /mnt/btrfs/snap-root/root_$(date +%F_%H:%M)
-btrfs subvolume snapshot /mnt/btrfs/@home /mnt/btrfs/snap-home/home_$(date +%F_%H:%M)
+btrfs subvolume snapshot / /mnt/btrfs/snap-root/root_$(date +%F_%H:%M)
+btrfs subvolume snapshot /home /mnt/btrfs/snap-home/home_$(date +%F_%H:%M)
 
 # umount #
 umount /mnt/btrfs
@@ -19,5 +19,5 @@ grub-mkconfig -o /boot/grub/grub.cfg
 exit 0
 
 ################################################
-##                                bcclsn v1.4 ##
+##                                bcclsn v1.3 ##
 ################################################
