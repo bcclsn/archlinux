@@ -1,0 +1,20 @@
+## bcclsn
+## windscribe-cli 
+##
+## 28.07.19
+## v1.0
+
+# start
+1. sudo systemctl stop dnscrypt.service NetworkManager.service
+2. sudo chattr -i /etc/resolv.conf && sudo nano /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
+3. comment dnscrypt  and decomment dns.watch
+4. sudo systemctl start windscribe.service
+5. windscribe (login|connect) 
+6. sudo systemctl start NetworkManager.service
+
+# stop
+1. windscribe disconnect
+2. sudo chattr -i /etc/resolv.conf && sudo nano /etc/resolv.conf && sudo chattr +i /etc/resolv.conf
+3. comment dns.watch and decomment dnscrypt 
+4. sudo systemctl restart dnscrypt.service NetworkManager.service
+
