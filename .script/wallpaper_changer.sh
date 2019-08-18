@@ -13,7 +13,7 @@ sleep 7200
 
 # start a new self-instance using the previous delay #
 exec $0
-exit 0 													# questo comando non verrà mai eseguito :P
+exit 0 										# questo comando non verrà mai eseguito :P
 
 ################################################
 ##                                bcclsn v1.0 ##
