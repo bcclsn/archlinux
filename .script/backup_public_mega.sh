@@ -35,8 +35,8 @@ while getopts ":brh" option ; do
    else
       # get error #
       export DISPLAY=:0 && zenity --warning --width=180 --height=80 \
-                                            --title "assenza connessione" \
-                                            --text "il backup verrà saltato" \
+                                            --title="assenza connessione" \
+                                            --text="il backup verrà saltato" \
                                             --timeout=12 2> /dev/null
    fi
 
@@ -60,8 +60,8 @@ while getopts ":brh" option ; do
 
          # notify #
          export DISPLAY=:0 && zenity --info --width=150 --height=80 \
-                                            --title "duplicity" \
-                                            --text "backup completato" \
+                                            --title="duplicity" \
+                                            --text="backup completato" \
                                             --timeout=6 2> /dev/null
          ;;
 
@@ -71,7 +71,7 @@ while getopts ":brh" option ; do
          date >> $LOG
 
          # insert restore path #
-         if RDIR="$(zenity --entry --title "seleziona cartella di destinazione")" ; then
+         if RDIR="$(zenity --entry --title="duplicity" --text="seleziona cartella di destinazione")" ; then
 
             # to restore a folder from your backup #
             duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $LOG
@@ -81,15 +81,15 @@ while getopts ":brh" option ; do
 
             #notify #
             export DISPLAY=:0 && zenity --info --width=150 --height=80 \
-                                               --title "duplicity" \
-                                               --text "restore completato" \
+                                               --title="duplicity" \
+                                               --text="restore completato" \
                                                --timeout=6 2> /dev/null
 
          else
             # get error #
             zenity --error --width=150 --height=80 \
-                           --title "Error" \
-                           --text "restore fallito!" \
+                           --title="Error" \
+                           --text="restore fallito!" \
                            --timeout=12 2> /dev/null
          fi
          ;;
@@ -101,5 +101,5 @@ done
 exit 0
 
 ################################################
-##                                bcclsn v2.1 ##
+##                              bcclsn v2.1.1 ##
 ################################################
