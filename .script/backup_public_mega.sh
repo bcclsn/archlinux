@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# help #
+# help menu #
 SCRIPT=$(basename $0)                                                          # imposta il nome dello script come variabile
 HELP="$SCRIPT [option]\n
  [-b] backup
@@ -30,20 +30,20 @@ while getopts ":brh" option ; do
       NAME="insert here the name of the backup"
       DIR="set the directory that you would to backup"
       MDIR="set the mega directory"
-      RDIR="set the restore directory"
       LOG="set log path"
 
    else
       # get error #
       export DISPLAY=:0 && zenity --warning --width=180 --height=80 \
-                                  --title "assenza connessione" \
-                                  --text "il backup verrà saltato" \
-                                  --timeout=6 2> /dev/null
+                                            --title "assenza connessione" \
+                                            --text "il backup verrà saltato" \
+                                            --timeout=12 2> /dev/null
    fi
 
    case $option in
       b) # timestamp #
          echo "" >> $LOG
+         echo "BACKUP" >> $LOG
          date >> $LOG
 
          # doing a monthly full backup (1M) #
@@ -60,16 +60,38 @@ while getopts ":brh" option ; do
 
          # notify #
          export DISPLAY=:0 && zenity --info --width=150 --height=80 \
-                                     --title "duplicity" \
-                                     --text "backup completato" \
-                                     --timeout=6 2> /dev/null
+                                            --title "duplicity" \
+                                            --text "backup completato" \
+                                            --timeout=6 2> /dev/null
          ;;
 
-      r) # to restore a folder from your backup #
-         duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $LOG
+      r) # timestamp #
+         echo "" >> $LOG
+         echo "RESTORE" >> $LOG
+         date >> $LOG
 
-         # unsetting the confidential variables #
-         unset PASSPHRASE
+         # insert restore path #
+         if RDIR="$(zenity --entry --title "seleziona cartella di destinazione")" ; then
+
+            # to restore a folder from your backup #
+            duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $LOG
+
+            # unsetting the confidential variables #
+            unset PASSPHRASE
+
+            #notify #
+            export DISPLAY=:0 && zenity --info --width=150 --height=80 \
+                                               --title "duplicity" \
+                                               --text "restore completato" \
+                                               --timeout=6 2> /dev/null
+
+         else
+            # get error #
+            zenity --error --width=150 --height=80 \
+                           --title "Error" \
+                           --text "restore fallito!" \
+                           --timeout=12 2> /dev/null
+         fi
          ;;
 
       h) echo -e "\n $HELP";;
@@ -79,5 +101,5 @@ done
 exit 0
 
 ################################################
-##                                bcclsn v2.0 ##
+##                                bcclsn v2.1 ##
 ################################################
