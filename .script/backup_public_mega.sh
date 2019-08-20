@@ -43,7 +43,6 @@ while getopts ":brh" option ; do
    case $option in
       b) # timestamp #
          echo "" >> $LOG
-         echo "BACKUP" >> $LOG
          date >> $LOG
 
          # doing a monthly full backup (1M) #
@@ -65,16 +64,15 @@ while getopts ":brh" option ; do
                                             --timeout=6 2> /dev/null
          ;;
 
-      r) # timestamp #
-         echo "" >> $LOG
-         echo "RESTORE" >> $LOG
-         date >> $LOG
-
-         # insert restore path #
+      r) # insert restore path #
          if RDIR="$(zenity --entry --title="duplicity" --text="seleziona cartella di destinazione")" ; then
 
+            # timestamp  #
+            echo "" >> $RDIR/duplicity.log
+            date >> $RDIR/duplicity.log
+
             # to restore a folder from your backup #
-            duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $LOG
+            duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $RDIR/duplicity.log
 
             # unsetting the confidential variables #
             unset PASSPHRASE
@@ -101,5 +99,5 @@ done
 exit 0
 
 ################################################
-##                              bcclsn v2.1.1 ##
+##                                bcclsn v2.2 ##
 ################################################
