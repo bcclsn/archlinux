@@ -1,12 +1,19 @@
 ########################################################
 ##     						      ##
-## setting up an Eclipse-based IDE for ChibiOS 17.6.0 ##
+## setting up an Eclipse-based IDE for ChibiOS        ##
 ##  						      ##
-##   					  v3.3 gen.18 ##
+##   					  v3.4 set.19 ##
 ## 					       bcclsn ##
 ##  					       	      ##  
 ########################################################
 
+
+update set.18
+windows -> search path and set CHIBIOS /usr/src/chibios as defined path variables
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+v3.3 gen.18
 
 # required software
 - java 8 runtime
