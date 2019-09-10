@@ -1,8 +1,8 @@
 ### installazione 
-### ver 2.2 - 06/2019
+### ver 2.3 - 09/2019
 ### bcclsn 
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------
 
 cfdisk /dev/sda
 
@@ -66,7 +66,6 @@ exit
 umount -R /mnt
 reboot
 
-
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 - Creo la cartella in /mnt/btrfs per montare @;
@@ -98,3 +97,20 @@ oppure
 Il risultato è questo:
 Create a snapshot of '/home' in '/mnt/btrfs/snap-home/home-00.29-06-06-17'
 Create a snapshot of '/' in '/mnt/btrfs/snap-root/root-00.29-06-06-17'
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+# pal-pinter commented on 4 Jul 19
+Hi @bcclsn
+I've received the same error on Archlinux. The problem was with the /var directory. 
+If you make a @var subvolume mounted the /var directory, you can boot into the new snapshot. 
+(Temp solution to probe it, delete content of the /var directory in the snapshot. However the first boot was very slow in this case)
+
+# bcclsn commented on 6 Jul 19
+
+hi @pal-pinter
+thank you so much! deleting the /var directory from the snapshot-X, I was able to start it correctly.
+the system autocreate three new snapshot in /path/snapshot-X/var/lib/portables ~/var/lib/machines and ~/var/tmp, but I think it is necessary.
+
+ndr. anyway, I have already the @var subvolume, so I must try the other solution
+
