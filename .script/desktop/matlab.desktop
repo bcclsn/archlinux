@@ -3,11 +3,13 @@
 [Desktop Entry]
 Version=2018a
 Type=Application
-Terminal=false
+Terminal=true
 MimeType=text/x-matlab
-Exec=matlab -desktop -nosplash
+Exec=/home/bcclsn/.script/matlab.sh
 Name=MATLAB
 Icon=/home/bcclsn/Downloads/matlab_logo.png
 Categories=Development;Math;Science
 Comment=Scientific computing environment
 StartupNotify=true
+
+## terminal false with zenity script
