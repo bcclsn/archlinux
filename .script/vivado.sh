@@ -10,7 +10,7 @@ sudo ip link set dev wlp1s0 address $matl_mac
 sudo ip link set dev wlp1s0 up
 
 # start vivado in a tmux session #
-tmux new-session -d -s sh /usr/src/Xilinx/Vivado/2019.1/bin/vivado
+tmux new-session -d -s sh /usr/src/Xilinx/Vivado/2019.1/bin/vivado 'vivado'
 sleep 20
 
 # restore previous address #
