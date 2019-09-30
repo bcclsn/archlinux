@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=true
+Name=Xilinx Vivado IDE
+Exec=/home/bcclsn/.script/vivado.sh
+Icon=/usr/src/Xilinx/Vivado/2019.1/doc/images/vivado_logo.png
+Categories=Development;
+Comment=Vivado Integrated Development Environment
+StartupNotify=true
