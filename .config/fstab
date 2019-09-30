@@ -6,10 +6,10 @@
 # <file system>	        <dir>	        <type>	        <options>   		                                             					<dump>	<pass>
 #
 # UUID=038bc12a-a751-4264-8861-20cbe428e5ca LABEL=archlinux
-/dev/sda2           	/         	btrfs     	rw,noatime,compress=lzo,ssd,space_cache,subvol=@				        		0 	0
+/dev/sda2           	/         	btrfs     	rw,noatime,autodefrag,compress=lzo,ssd,space_cache,subvol=@	             	        		0 	0
 
 # UUID=038bc12a-a751-4264-8861-20cbe428e5ca LABEL=archlinux
-/dev/sda2           	/home     	btrfs     	rw,noatime,compress=lzo,ssd,space_cache,subvol=@home	                  				0 	0
+/dev/sda2           	/home     	btrfs     	rw,noatime,autodefrag,compress=lzo,ssd,space_cache,subvol=@home	              				0 	0
 
 # UUID=68DA-13E0
 /dev/sda1           	/boot/efi     	vfat      	rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro	0 	2
