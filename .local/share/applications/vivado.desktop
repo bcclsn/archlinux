@@ -3,9 +3,11 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Terminal=true
+#Terminal=true
+Terminal=false
 Name=Xilinx Vivado IDE
-Exec=/home/bcclsn/.script/vivado.sh
+#Exec=/home/bcclsn/.script/vivado.sh
+Exec=sh /usr/src/Xilinx/Vivado/2019.1/bin/vivado -log /home/bcclsn/.log/vivado.log -journal /home/bcclsn/.log/vivado.jou
 Icon=/usr/src/Xilinx/Vivado/2019.1/doc/images/vivado_logo.png
 Categories=Development;
 Comment=Vivado Integrated Development Environment
