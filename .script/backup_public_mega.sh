@@ -38,6 +38,7 @@ while getopts ":brh" option ; do
                                             --title="assenza connessione" \
                                             --text="il backup verrà saltato" \
                                             --timeout=12 2> /dev/null
+      exit 1
    fi
 
    case $option in
@@ -89,6 +90,7 @@ while getopts ":brh" option ; do
                            --title="Error" \
                            --text="restore fallito!" \
                            --timeout=12 2> /dev/null
+            exit 1
          fi
          ;;
 
@@ -99,5 +101,5 @@ done
 exit 0
 
 ################################################
-##                                bcclsn v2.2 ##
+##                                bcclsn v2.3 ##
 ################################################
