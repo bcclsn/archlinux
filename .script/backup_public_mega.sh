@@ -50,10 +50,11 @@ while getopts ":brh" option ; do
          duplicity --full-if-older-than 1M \
                    --exclude ~/.local/share/Trash \
                    --exclude ~/.cache \
-                   --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR >> $LOG
+                   --log-file=$LOG \
+                   --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR
 
          # deleting full backups older than 2 months (2) #
-         duplicity remove-all-but-n-full 2 --force mega://$USER:$PASS@$HOST/$MDIR >> $LOG
+         duplicity remove-all-but-n-full 2 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
 
          # unsetting the confidential variables #
          unset PASSPHRASE
@@ -73,7 +74,7 @@ while getopts ":brh" option ; do
             date >> $RDIR/duplicity.log
 
             # to restore a folder from your backup #
-            duplicity restore mega://$USER:$PASS@$HOST/$MDIR $RDIR >> $RDIR/duplicity.log
+            duplicity restore --log-file=$RDIR/duplicity.log mega://$USER:$PASS@$HOST/$MDIR $RDIR
 
             # unsetting the confidential variables #
             unset PASSPHRASE
@@ -101,5 +102,5 @@ done
 exit 0
 
 ################################################
-##                                bcclsn v2.3 ##
+##                                bcclsn v2.4 ##
 ################################################
