@@ -1,7 +1,7 @@
 export ZSH=$HOME/.oh-my-zsh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export LANG=it_IT.UTF-8
-export EDITOR='nano'
+export EDITOR='vim'
 
 HIST_STAMPS="mm/dd/yyyy"
 ZSH_THEME="bcclsn-v2"
