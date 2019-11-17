@@ -38,7 +38,7 @@ set number
 set notimeout ttimeout ttimeoutlen=200
  
 "Highlight the current line
-set cursorline
+"set cursorline
 
 "Set the color theme to be used 
 colors ron
