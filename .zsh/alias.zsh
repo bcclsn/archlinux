@@ -20,3 +20,4 @@ alias pacup='sudo sh /home/bcclsn/.script/btrfs_snap.sh && sudo pacman -Syu && s
 alias snapshot='sudo sh /home/bcclsn/.script/btrfs_snap.sh'
 alias mat='xhost + && sudo sh /usr/src/MATLAB/R2019b/bin/activate_matlab.sh && exit'
 alias routing='java -jar /usr/src/freeRouting_20190401.jar'
+alias backup='sh .script/backup_mega.sh -b'
