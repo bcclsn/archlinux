@@ -4,7 +4,7 @@
 Version=2.1.1
 Name=PrusaSlicer
 Comment=bcclsn
-Exec=/usr/src/PrusaSlicer_2.1.1.AppImage
+Exec=prusa-slicer
 Icon=/home/bcclsn/Downloads/prusaslicer_icon.png
 Terminal=false
 Type=Application
