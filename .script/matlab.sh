@@ -2,7 +2,7 @@
 
 # get current mac address and define matlab one #
 curr_mac=$(ip link show wlp1s0 | grep "ether" | cut -c 16- | cut -c -17)
-matl_mac="B2:4B:60:88:DE:02"
+matl_mac="A2:28:6E:9F:C3:10"
 
 # spoofing mac address #
 sudo ip link set dev wlp1s0 down
@@ -23,5 +23,5 @@ sudo -k
 exit 0
 
 ################################################
-##                              bcclsn v2.1.2 ##
+##                              bcclsn v2.1.3 ##
 ################################################
