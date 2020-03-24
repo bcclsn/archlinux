@@ -5,6 +5,7 @@ SCRIPT=$(basename $0)                                                          #
 HELP="$SCRIPT [option]\n
  [-b] backup
  [-r] restore
+ [-c] cleanup
  [-h] help"
 
 # controllo che sia stato passato almeno un argomento #
@@ -14,13 +15,13 @@ if [ $# -eq 0 ] ; then   			                                # se lo script è es
 fi
 
 # dichiaro le opzioni accettate (i due punti iniziali sopprimono i messaggi di errore) #
-while getopts ":brh" option ; do
+while getopts ":brch" option ; do
 
    # manual OnBootSec monotonic timer option #
    while true ; do OnBootSec=$(cat /proc/uptime | awk '{print $1}') ; if [ ${OnBootSec%.*} -gt 180 ] ; then break ; fi ; done
 
    # check connection #
-   if (ping -q -c 1 -W 1 8.8.8.8 >/dev/null || ping -q -c 1 -W 1 google.com >/dev/null) ; then
+   if (ping -q -c 1 -W 1 1.1.1.1 >/dev/null || ping -q -c 1 -W 1 duckduckgo.com >/dev/null) ; then
 
       # setting the confidential variables #
       export PASSPHRASE="insert here your passphrase"
@@ -94,6 +95,23 @@ while getopts ":brh" option ; do
             exit 1
          fi
          ;;
+         
+      c) # cleanup #
+         echo "" >> $LOG
+         date >> $LOG
+
+         # doing a manual cleanup #
+         duplicity cleanup --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
+
+         # unsetting the confidential variables #
+         unset PASSPHRASE
+
+         # notify #
+         export DISPLAY=:0 && zenity --info --width=150 --height=80 \
+                                            --title="duplicity" \
+                                            --text="cleanup completato" \
+                                            --timeout=6 2> /dev/null
+         ;;         
 
       h) echo -e "\n $HELP";;
       *) echo -e "\n invalid option!\n\n $HELP";;
@@ -102,5 +120,5 @@ done
 exit 0
 
 ################################################
-##                                bcclsn v2.4 ##
+##                                bcclsn v2.5 ##
 ################################################
