@@ -10,7 +10,7 @@ set wildmenu
 "Show partial commands in the last line of the screen
 set showcmd
  
-" Allow backspacing over autoindent, line breaks and start of insert action
+"Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
  
 "When opening a new line and no filetype-specific indenting is enabled, keep the same indent as the line you're currently on(Useful for READMEs, etc)
@@ -18,6 +18,12 @@ set autoindent
 
 "fa in modo che i tab siano trasformati in spazi
 set expandtab
+
+"fa in modo che i tab siano pari al valore indicato
+set tabstop=3
+
+"fa in modo che l'indentazione sia pari al valore specificato 
+set shiftwidth=3
 
 "Display the cursor position on the last line of the screen or in the status line of a window
 set ruler
@@ -43,4 +49,4 @@ set notimeout ttimeout ttimeoutlen=200
 "Set the color theme to be used 
 colors ron
 
-" bcclsn v0.2 " 
+" bcclsn v0.3 " 
