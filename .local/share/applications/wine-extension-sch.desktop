@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=PSIM Document
+MimeType=application/x-kicad-schematic;
+Exec=env WINEPREFIX="/home/bcclsn/.wine" wine start /ProgIDOpen PSIM.Document %f
+NoDisplay=true
+StartupNotify=true
+Icon=B830_PSIM.0

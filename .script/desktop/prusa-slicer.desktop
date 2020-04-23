@@ -1,12 +1,11 @@
 #!/usr/bin/env xdg-open
 
 [Desktop Entry]
-Version=2.1.1
+Version=2.2.0
 Name=PrusaSlicer
 Comment=bcclsn
-#Exec=/usr/src/PrusaSlicer_2.1.1.AppImage
 Exec=prusa-slicer
-Icon=/home/bcclsn/Downloads/prusaslicer_icon.png
+Icon=/home/bcclsn/.icons/prusaslicer_icon.png
 Terminal=false
 Type=Application
 Categories=Utility;Application;
