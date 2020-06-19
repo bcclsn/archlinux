@@ -13,14 +13,14 @@ source $HOME/.zsh/alias.zsh
 source $HOME/.zsh/setopt.zsh
 
 ## Set tmux for all terminals
-    if [[ -z "$TMUX" ]]; then
-        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
-    if [[ -z "$ID" ]]; then
-       tmux new-session
-    else
-       tmux attach-session -t "$ID"
-    fi
-    fi
+#    if [[ -z "$TMUX" ]]; then
+#        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
+#    if [[ -z "$ID" ]]; then
+#       tmux new-session
+#    else
+#       tmux attach-session -t "$ID"
+#    fi
+#    fi
 
 ##echo "inizio blocco info"
 echo ""
