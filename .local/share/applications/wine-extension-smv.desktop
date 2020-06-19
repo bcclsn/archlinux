@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=PSIM Document
-MimeType=application/x-wine-extension-smv;
-Exec=env WINEPREFIX="/home/bcclsn/.wine" wine start /ProgIDOpen Simview.Document %f
-NoDisplay=true
-StartupNotify=true
-Icon=B830_PSIM.0

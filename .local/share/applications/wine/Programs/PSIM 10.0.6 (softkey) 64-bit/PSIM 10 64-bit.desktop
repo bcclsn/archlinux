@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=PSIM 10 64-bit
-Exec=env WINEPREFIX="/home/bcclsn/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/bcclsn/.wine/dosdevices/c:/users/bcclsn/Start\\ Menu/Programs/PSIM\\ 10.0.6\\ \\(softkey\\)\\ 64-bit/PSIM\\ 10\\ 64-bit.lnk
-Type=Application
-StartupNotify=true
-Icon=8134_IconD061BC76.1
-StartupWMClass=psim.exe

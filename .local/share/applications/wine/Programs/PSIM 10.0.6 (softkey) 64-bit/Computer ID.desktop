@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Computer ID
-Exec=env WINEPREFIX="/home/bcclsn/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/bcclsn/.wine/dosdevices/c:/users/bcclsn/Start\\ Menu/Programs/PSIM\\ 10.0.6\\ \\(softkey\\)\\ 64-bit/Computer\\ ID.lnk
-Type=Application
-StartupNotify=true
-Icon=E9F9_ComputerID.0
-StartupWMClass=computerid.exe
