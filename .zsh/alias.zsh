@@ -1,4 +1,4 @@
-alias shutdown='sudo shutdown -h now'
+alias off='sudo shutdown -h now'
 alias ls='ls --classify --color=auto --human-readable'
 alias ll='ls -l'
 alias la='ls -a'

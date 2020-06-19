@@ -6,21 +6,21 @@ export EDITOR='vim'
 HIST_STAMPS="mm/dd/yyyy"
 ZSH_THEME="bcclsn-v2"
 ENABLE_CORRECTION="true"
-plugins=(sudo dirhistory web-search zsh-syntax-highlighting)
+plugins=(sudo dirhistory web-search tmux vim-interaction zsh-syntax-highlighting) 
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh/alias.zsh
 source $HOME/.zsh/setopt.zsh
 
 ## Set tmux for all terminals
-#    if [[ -z "$TMUX" ]]; then
-#        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
-#    if [[ -z "$ID" ]]; then
-#       tmux new-session
-#    else
-#       tmux attach-session -t "$ID"
-#    fi
-#    fi
+    if [[ -z "$TMUX" ]]; then
+        ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
+    if [[ -z "$ID" ]]; then
+       tmux new-session
+    else
+       tmux attach-session -t "$ID"
+    fi
+    fi
 
 ##echo "inizio blocco info"
 echo ""
