@@ -1,5 +1,5 @@
 ### installazione 
-### ver 2.3 - 09/2019
+### ver 2.4 - 06/2020
 ### bcclsn 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,23 +20,22 @@ umount /mnt
 mount -o compress=lzo,subvol=@ /dev/sda2 /mnt
 mkdir -p /mnt/home
 mount -o compress=lzo,subvol=@home /dev/sda2 /mnt/home
-mkdir -p /mnt/var
-btrfs subvolume create /mnt/var/tmp
-btrfs subvolume create /mnt/tmp
 
 mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 
 wifi-menu
 
-pacstrap /mnt base base-devel btrfs-progs wpa_supplicant dialog
-genfstab -p /mnt >> /mnt/etc/fstab
-## change relatime to noatime (<option>) 
+pacstrap /mnt base linux linux-firmware base-devel btrfs-progs wpa_supplicant dialog nano intel-ucode
+genfstab -U /mnt >> /mnt/etc/fstab
+## change relatime to noatime and add autodefrag (<option>) 
 
 arch-chroot /mnt
 
 echo "computer_name" > /etc/hostname
-ln -s /usr/share/zoneinfo/Europe/Rome /etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+
+hwclock --systohc
 
 Uncomment the italian language in /etc/locale.gen and run locale-gen
 In /etc/locale.conf write:
