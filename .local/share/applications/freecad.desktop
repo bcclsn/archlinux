@@ -4,7 +4,8 @@
 Version=0.18
 Name=FreeCAD
 Comment=bcclsn
-Exec=/usr/src/FreeCAD_0.18.AppImage
+Exec=freecad
+#Exec=/usr/src/FreeCAD_0.18.AppImage
 Icon=/home/bcclsn/.icons/freecad_icon.png
 Terminal=false
 Type=Application
