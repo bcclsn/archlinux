@@ -1,5 +1,6 @@
 #!/usr/bin/env xdg-open
 
+## bcclsn
 [Desktop Entry]
 Version=2.2.0
 Name=PrusaSlicer
@@ -10,3 +11,16 @@ Terminal=false
 Type=Application
 Categories=Utility;Application;
 Name[it_IT]=PrusaSlicer
+
+
+## default 
+#[Desktop Entry]
+#Name=PrusaSlicer
+#Exec=/usr/bin/prusa-slicer
+#Icon=prusa-slicer
+#Terminal=false
+#Type=Application
+#StartupNotify=false
+#MimeType=model/stl;application/vnd.ms-3mfdocument;application/prs.wavefront-obj;application/x-amf;
+#Categories=Graphics;3DGraphics;
+#Keywords=3D;Printing;Slicer;
