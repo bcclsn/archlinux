@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=20.3.x
+Name=ChibiStudio
+Comment=bcclsn
+Exec=/opt/ChibiStudio/ChibiStudio-GCC9.2.1
+Icon=/opt/ChibiStudio/eclipse_2020-03/icon.xpm
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+Name[it_IT]=ChibiStudio
