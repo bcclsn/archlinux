@@ -1,7 +1,7 @@
 #!/usr/bin/env xdg-open
 
 [Desktop Entry]
-Version=2019b
+Version=2020a
 Type=Application
 Terminal=true
 MimeType=text/x-matlab
