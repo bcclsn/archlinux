@@ -36,6 +36,7 @@
 .java/
 .kodi/
 .local/
+.log/
 .matlab/
 .mozilla-backup/
 .mozilla/
