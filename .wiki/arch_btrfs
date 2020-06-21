@@ -1,5 +1,5 @@
 ### installazione 
-### ver 2.4 - 06/2020
+### ver 2.5 - 06/2020
 ### bcclsn 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,6 +64,24 @@ grub-mkconfig -o /boot/grub/grub.cfg
 exit
 umount -R /mnt
 reboot
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Swap File
+
+sudo mount -t btrfs /dev/sda2 /mnt
+sudo btrfs subvolume create /mnt/@swap
+sudo chattr -R +C /mnt/@swap                                                    il flag NOCOW (fondamentale!)
+sudo btrfs property set /mnt/@swap compression none
+
+sudo truncate -s 0 /mnt/@swap/swapfile
+sudo dd if=/dev/zero of=/mnt/@swap/swapfile bs=1M count=2000 status=progress
+sudo chmod 600 /mnt/@swap/swapfile
+sudo mkswap /mnt/@swap/swapfile
+sudo umount /mnt
+
+Modifica del file fstab
+Riavviare il sistema affinché le modifiche abbiano effetto 
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
 

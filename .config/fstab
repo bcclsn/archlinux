@@ -2,11 +2,14 @@
 # bcclsn
 #
 # 11 ott 2017
-# 17 giu 2020
+# 21 giu 2020
 #
 # Static information about the filesystems.
 #
 # <file system>      <dir>       <type>      <options>                                                                                                  <dump>  <pass>
+
+# /dev/sda1
+UUID=E1C2-50F7       /boot/efi   vfat        rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro   0       2
 
 # /dev/sda2
 /dev/sda2            /           btrfs       rw,noatime,compress=lzo,ssd,space_cache,autodefrag,subvolid=256,subvol=/@,subvol=@                         0       0
@@ -14,6 +17,6 @@
 # /dev/sda2
 /dev/sda2            /home       btrfs       rw,noatime,compress=lzo,ssd,space_cache,autodefrag,subvolid=257,subvol=/@home,subvol=@home                 0       0
 
-# /dev/sda1
-UUID=E1C2-50F7       /boot/efi   vfat        rw,noatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro   0       2
-
+# /dev/sda2
+/swap/swapfile       none        swap        defaults                                                                                                   0       0
+/dev/sda2            /swap       btrfs       defaults,subvol=@swap 
