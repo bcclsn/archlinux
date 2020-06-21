@@ -33,6 +33,7 @@
 .config/user-dirs.locale
 .eclipse/
 .gitconfig
+.gnupg/
 .java/
 .kodi/
 .local/
