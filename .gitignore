@@ -27,6 +27,7 @@
 .config/kicad/sym-lib-table
 .config/libreoffice/
 .config/mimeapps.list
+.config/monitors.xml
 .config/nautilus/
 .config/pulse/
 .config/teams/
