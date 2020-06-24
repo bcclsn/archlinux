@@ -1,7 +1,9 @@
 .FreeCAD/
 .PrusaSlicer/
 .cache/
+.config/binwalk/
 .config/BraveSoftware/
+.config/evince/
 .config/FreeCAD/
 .config/Microsoft/
 .config/QtProject.conf
