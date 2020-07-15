@@ -15,6 +15,7 @@
 .oh-my-zsh/
 .p2/
 .pki/
+.python_history
 .putty/
 .script/backup_b2.sh
 .script/backup_mega.sh
