@@ -51,8 +51,8 @@ GRUB_COLOR_HIGHLIGHT="white/black"
 # Uncomment one of them for the gfx desired, a image background or a gfxtheme
 #GRUB_THEME="/path/to/gfxtheme"
 GRUB_FONT="/boot/grub/fonts/unicode.pf2"
-#GRUB_BACKGROUND="/boot/grub/wallpapers/wallhaven-lmxmxy.png"
-GRUB_BACKGROUND="/boot/grub/wallpapers/wallhaven-45881.png"
+#GRUB_BACKGROUND="/home/bcclsn/.dotfiles/wallpaper/wallhaven-lmxmxy.png"
+GRUB_BACKGROUND="/home/bcclsn/.dotfiles/wallpaper/wallhaven-45881.png"
 
 # Uncomment to get a beep at GRUB start
 #GRUB_INIT_TUNE="480 440 1"
