@@ -25,10 +25,10 @@ rm 00-default.link && cp /home/$USER/.dotfiles/config/00-default.link 00-default
 
 cd /etc/systemd/system
 rm backup.service backup.timer btrfs_snap.service btrfs_snap.timer
-ln -s /home/$USER/.dotfiles/systemd/backup.service backup.service
-ln -s /home/$USER/.dotfiles/systemd/backup.timer backup.timer
-ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.service btrfs_snap.service
-ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.timer btrfs_snap.timer
+cp /home/$USER/.dotfiles/systemd/backup.service backup.service
+cp /home/$USER/.dotfiles/systemd/backup.timer backup.timer
+cp /home/$USER/.dotfiles/systemd/btrfs_snap.service btrfs_snap.service
+cp /home/$USER/.dotfiles/systemd/btrfs_snap.timer btrfs_snap.timer
 
 sleep 5
 echo "Done"
@@ -47,8 +47,7 @@ sleep 5
 
 echo "Generating grub configuration file..."
 grub-mkconfig -o /boot/grub/grub.cfg
-sleep 5
 
 ################################################
-##                                bcclsn v1.0 ##
+##                                bcclsn v1.1 ##
 ################################################
