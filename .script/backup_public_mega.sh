@@ -21,7 +21,7 @@ while getopts ":brch" option ; do
    while true ; do OnBootSec=$(cat /proc/uptime | awk '{print $1}') ; if [ ${OnBootSec%.*} -gt 180 ] ; then break ; fi ; done
 
    # check connection #
-   if (ping -q -c 1 -W 1 1.1.1.1 >/dev/null || ping -q -c 1 -W 1 duckduckgo.com >/dev/null) ; then
+   if (ping -q -c 1 -W 1 pornhub.com >/dev/null || ping -q -c 1 -W 1 duckduckgo.com >/dev/null) ; then
 
       # setting the confidential variables #
       export PASSPHRASE="insert here your passphrase"
