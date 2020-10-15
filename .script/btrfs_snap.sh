@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # mount snapshot folder #
-mount -t btrfs -o compress=lzo,subvol=/ /dev/sda2 /mnt/btrfs
+mount -t btrfs -o compress=zstd:3,subvol=/ /dev/sda2 /mnt/btrfs
 
 # get the snapshot #
 btrfs subvolume snapshot / /mnt/btrfs/snap-root/root_$(date +%F_%H:%M)

@@ -4,7 +4,7 @@
 #            USE IT AT YOUR RISK
 
 # mount snapshot folder #
-mount -t btrfs -o compress=lzo,subvol=/ /dev/sda2 /mnt/btrfs
+mount -t btrfs -o compress=zstd:3,subvol=/ /dev/sda2 /mnt/btrfs
 
 # remove the snapshot #
 cd /mnt/btrfs/snap-root
