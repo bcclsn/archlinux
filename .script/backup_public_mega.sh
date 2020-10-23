@@ -9,9 +9,9 @@ HELP="$SCRIPT [option]\n
  [-h] help"
 
 # controllo che sia stato passato almeno un argomento #
-if [ $# -eq 0 ] ; then   			                                               # se lo script è eseguito senza argomenti
-   echo -e "$HELP"		                                                        # stampa l'help
-   exit 1         		                                                        # ed esce
+if [ $# -eq 0 ] ; then                                                          # se lo script è eseguito senza argomenti
+   echo -e "$HELP"                                                              # stampa l'help
+   exit 1                                                                       # ed esce
 fi
 
 # dichiaro le opzioni accettate (i due punti iniziali sopprimono i messaggi di errore) #
@@ -44,8 +44,7 @@ while getopts ":brch" option ; do
 
    case $option in
       b) # timestamp #
-         echo "" >> $LOG
-         date >> $LOG
+         echo "\n*** $(date) ***\n*** BACKUP\n" >> $LOG
 
          # doing a monthly full backup (1M) #
          duplicity --full-if-older-than 1M \
@@ -54,7 +53,7 @@ while getopts ":brch" option ; do
                    --log-file=$LOG \
                    --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR
 
-         # deleting full backups older than 2 months (2) #
+         # deleting full backups older than 2 month #
          duplicity remove-all-but-n-full 2 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
 
          # unsetting the confidential variables #
@@ -68,6 +67,8 @@ while getopts ":brch" option ; do
          ;;
 
       r) # insert restore path #
+         echo "\n*** $(date) ***\n*** RESTORE\n" >> $LOG
+
          if RDIR="$(zenity --entry --title="duplicity" --text="seleziona cartella di destinazione")" ; then
 
             # timestamp  #
@@ -92,13 +93,12 @@ while getopts ":brch" option ; do
                            --title="Error" \
                            --text="restore fallito!" \
                            --timeout=12 2> /dev/null
-            exit 1
+         exit 1
          fi
          ;;
-         
+
       c) # cleanup #
-         echo "" >> $LOG
-         date >> $LOG
+         echo "\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
 
          # doing a manual cleanup #
          duplicity cleanup --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
@@ -111,7 +111,7 @@ while getopts ":brch" option ; do
                                             --title="duplicity" \
                                             --text="cleanup completato" \
                                             --timeout=6 2> /dev/null
-         ;;         
+         ;;
 
       h) echo -e "\n $HELP";;
       *) echo -e "\n invalid option!\n\n $HELP";;
@@ -120,5 +120,5 @@ done
 exit 0
 
 ################################################################################
-##                                                              bcclsn v2.5.1 ##
+##                                                                bcclsn v2.6 ##
 ################################################################################
