@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # help menu #
-SCRIPT=$(basename $0)                                                          # imposta il nome dello script come variabile
+SCRIPT=$(basename $0)                                                           # imposta il nome dello script come variabile
 HELP="$SCRIPT [option]\n
  [-b] backup
  [-r] restore
@@ -9,9 +9,9 @@ HELP="$SCRIPT [option]\n
  [-h] help"
 
 # controllo che sia stato passato almeno un argomento #
-if [ $# -eq 0 ] ; then   			                                # se lo script è eseguito senza argomenti
-   echo -e "$HELP"		                                                # stampa l'help
-   exit 1         		                                                # ed esce
+if [ $# -eq 0 ] ; then   			                                               # se lo script è eseguito senza argomenti
+   echo -e "$HELP"		                                                        # stampa l'help
+   exit 1         		                                                        # ed esce
 fi
 
 # dichiaro le opzioni accettate (i due punti iniziali sopprimono i messaggi di errore) #
@@ -119,6 +119,6 @@ while getopts ":brch" option ; do
 done
 exit 0
 
-################################################
-##                                bcclsn v2.5 ##
-################################################
+################################################################################
+##                                                              bcclsn v2.5.1 ##
+################################################################################
