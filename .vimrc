@@ -43,10 +43,14 @@ set number
 "Quickly time out on keycodes, but never time out on mappings 
 set notimeout ttimeout ttimeoutlen=200
  
+"Set 256 colors set
+set t_Co=256
+
 "Highlight the current line
-"set cursorline
+set cursorline
 
-"Set the color theme to be used 
-colors ron
+"Set the color theme to be used. 
+"without .vim/, use "ron"!
+colors monokai 
 
-" bcclsn v0.3 " 
+" bcclsn v0.4 " 
