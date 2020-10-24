@@ -44,7 +44,10 @@ while getopts ":brch" option ; do
 
    case $option in
       b) # timestamp #
-         echo "\n*** $(date) ***\n*** BACKUP\n" >> $LOG
+         echo -e "\n\n*** $(date) ***\n*** BACKUP\n" >> $LOG
+
+         # deleting full backups older than 1 month #
+         duplicity remove-all-but-n-full 1 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
 
          # doing a monthly full backup (1M) #
          duplicity --full-if-older-than 1M \
@@ -52,9 +55,6 @@ while getopts ":brch" option ; do
                    --exclude ~/.cache \
                    --log-file=$LOG \
                    --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR
-
-         # deleting full backups older than 2 month #
-         duplicity remove-all-but-n-full 2 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
 
          # unsetting the confidential variables #
          unset PASSPHRASE
@@ -67,13 +67,10 @@ while getopts ":brch" option ; do
          ;;
 
       r) # insert restore path #
-         echo "\n*** $(date) ***\n*** RESTORE\n" >> $LOG
-
          if RDIR="$(zenity --entry --title="duplicity" --text="seleziona cartella di destinazione")" ; then
 
             # timestamp  #
-            echo "" >> $RDIR/duplicity.log
-            date >> $RDIR/duplicity.log
+            echo -e "\n\n*** $(date) ***\n*** RESTORE\n" >> $RDIR/duplicity.log
 
             # to restore a folder from your backup #
             duplicity restore --log-file=$RDIR/duplicity.log mega://$USER:$PASS@$HOST/$MDIR $RDIR
@@ -98,7 +95,7 @@ while getopts ":brch" option ; do
          ;;
 
       c) # cleanup #
-         echo "\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
+         echo -e "\n\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
 
          # doing a manual cleanup #
          duplicity cleanup --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
@@ -120,5 +117,6 @@ done
 exit 0
 
 ################################################################################
-##                                                                bcclsn v2.6 ##
+##                                                                bcclsn v2.7 ##
 ################################################################################
+
