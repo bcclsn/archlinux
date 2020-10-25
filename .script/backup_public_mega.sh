@@ -44,7 +44,7 @@ while getopts ":brch" option ; do
 
    case $option in
       b) # timestamp #
-         echo -e "\n\n*** $(date) ***\n*** BACKUP\n" >> $LOG
+         echo -e "\n*** $(date) ***\n*** BACKUP\n" >> $LOG
 
          # doing a monthly full backup (1M) #
          duplicity --full-if-older-than 1M \
@@ -70,7 +70,7 @@ while getopts ":brch" option ; do
          if RDIR="$(zenity --entry --title="duplicity" --text="seleziona cartella di destinazione")" ; then
 
             # timestamp  #
-            echo -e "\n\n*** $(date) ***\n*** RESTORE\n" >> $RDIR/duplicity.log
+            echo -e "\n*** $(date) ***\n*** RESTORE\n" >> $RDIR/duplicity.log
 
             # to restore a folder from your backup #
             duplicity restore --log-file=$RDIR/duplicity.log mega://$USER:$PASS@$HOST/$MDIR $RDIR
@@ -95,7 +95,7 @@ while getopts ":brch" option ; do
          ;;
 
       c) # cleanup #
-         echo -e "\n\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
+         echo -e "\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
 
          # doing a manual cleanup #
          duplicity cleanup --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
