@@ -46,15 +46,15 @@ while getopts ":brch" option ; do
       b) # timestamp #
          echo -e "\n\n*** $(date) ***\n*** BACKUP\n" >> $LOG
 
-         # deleting full backups older than 1 month #
-         duplicity remove-all-but-n-full 1 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
-
          # doing a monthly full backup (1M) #
          duplicity --full-if-older-than 1M \
                    --exclude ~/.local/share/Trash \
                    --exclude ~/.cache \
                    --log-file=$LOG \
                    --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR
+
+         # deleting full backups older than 1 month #
+         duplicity remove-all-but-n-full 1 --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
 
          # unsetting the confidential variables #
          unset PASSPHRASE
