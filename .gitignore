@@ -24,6 +24,7 @@
 .swt/
 .tooling/
 .viminfo
+.vnc/
 .zcompdump*
 .zsh_history
 Desktop/
