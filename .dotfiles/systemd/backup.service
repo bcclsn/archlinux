@@ -1,9 +1,11 @@
 [Unit]
-Description=Backup Settimanale
-Wants=NetworkManager-wait-online.service
-After=NetworkManager-wait-online.service
+Description=Backup Giornaliero
+# disable if you run as --user
+# Wants=NetworkManager-wait-online.service
+# After=NetworkManager-wait-online.service
 
 [Service]
 Type=oneshot
-User=bcclsn
-ExecStart=/usr/bin/bash /home/bcclsn/.script/backup_mega.sh -b
+RemainAfterExit=yes
+ExecStart=/usr/bin/tmux new-session -d -s "duplicity" /home/bcclsn/.script/backup_mega.sh -b
+ExecStop=/usr/bin/tmux kill-session -t "duplicity"

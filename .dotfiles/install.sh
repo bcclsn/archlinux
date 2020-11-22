@@ -5,49 +5,53 @@ USER="bcclsn"
 echo "Copying Dotfiles..."
 
 cd /etc
-rm libinput-gestures.conf && cp /home/$USER/.dotfiles/config/libinput-gestures.conf libinput-gestures.conf
+sudo rm libinput-gestures.conf && sudo cp /home/$USER/.dotfiles/config/libinput-gestures.conf libinput-gestures.conf
 
-chattr -i resolv.conf 
-rm resolv.conf && cp /home/$USER/.dotfiles/config/resolv.conf resolv.conf
-chattr +i resolv.conf
+sudo chattr -i resolv.conf 
+sudo rm resolv.conf && sudo cp /home/$USER/.dotfiles/config/resolv.conf resolv.conf
+sudo chattr +i resolv.conf
 
-rm fstab && cp /home/$USER/.dotfiles/config/fstab fstab
-rm hosts && cp /home/$USER/.dotfiles/config/hosts hosts
-
+sudo rm fstab && sudo cp /home/$USER/.dotfiles/config/fstab fstab
+sudo rm hosts && sudo cp /home/$USER/.dotfiles/config/hosts hosts
+ 
 cd /etc/default
-rm grub && cp /home/$USER/.dotfiles/config/grub grub
-
+sudo rm grub && sudo cp /home/$USER/.dotfiles/config/grub grub
+ 
 cd /etc/dnscrypt-proxy
-rm dnscrypt-proxy.toml && cp /home/$USER/.dotfiles/config/dnscrypt-proxy.toml dnscrypt-proxy.toml 
-
+sudo rm dnscrypt-proxy.toml && sudo cp /home/$USER/.dotfiles/config/dnscrypt-proxy.toml dnscrypt-proxy.toml 
+ 
 cd /etc/systemd/network
-rm 00-default.link && cp /home/$USER/.dotfiles/config/00-default.link 00-default.link 
+sudo rm 00-default.link && sudo cp /home/$USER/.dotfiles/config/00-default.link 00-default.link 
+ 
+sleep 5
+echo "Done"
+ 
+echo "Generating grub configuration file..."
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-cd /etc/systemd/system
-rm backup.service backup.timer btrfs_snap.service btrfs_snap.timer
-cp /home/$USER/.dotfiles/systemd/backup.service backup.service
-cp /home/$USER/.dotfiles/systemd/backup.timer backup.timer
-cp /home/$USER/.dotfiles/systemd/btrfs_snap.service btrfs_snap.service
-cp /home/$USER/.dotfiles/systemd/btrfs_snap.timer btrfs_snap.timer
+echo "Linking Dotfiles..."
+
+mkdir -p /home/$USER/.config/systemd/user/
+ln -s /home/$USER/.dotfiles/systemd/backup.service /home/$USER/.config/systemd/user/backup.service
+ln -s /home/$USER/.dotfiles/systemd/backup.timer /home/$USER/.config/systemd/user/backup.timer
+ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.service /home/$USER/.config/systemd/user/btrfs_snap.service
+ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.timer /home/$USER/.config/systemd/user/btrfs_snap.timer
 
 sleep 5
 echo "Done"
 
 echo "Reloading deamons..."
-systemctl daemon-reload
+systemctl --user daemon-reload
 sleep 5
 
 echo "Enabling Timer 'backup'..."
-systemctl enable backup.timer 
+systemctl --user enable backup.timer 
 sleep 5
  
 echo "Enabling Timer 'btrfs_snap'..."
-systemctl enable btrfs_snap.timer
+systemctl --user enable btrfs_snap.timer
 sleep 5
 
-echo "Generating grub configuration file..."
-grub-mkconfig -o /boot/grub/grub.cfg
-
 ################################################
-##                                bcclsn v1.1 ##
+##                                bcclsn v1.2 ##
 ################################################
