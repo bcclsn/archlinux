@@ -12,7 +12,7 @@ if (zenity --password --title "MAC Spoofing" | \
    ) ; then
 
     # start matlab in a tmux session #
-    tmux new-session -d -s "matlab -desktop" matlab -desktop
+    tmux new-session -d -s "matlab" matlab -desktop
     sleep 20
 
     # restore previous address and exit #

@@ -10,7 +10,7 @@ sudo ip link set dev wlp1s0 address $matl_mac
 sudo ip link set dev wlp1s0 up
 
 # start matlab in a tmux session #
-tmux new-session -d -s "matlab" matlab
+tmux new-session -d -s "matlab" matlab -desktop
 sleep 30
 
 # restore previous address #
