@@ -12,7 +12,7 @@ if (zenity --password --title "MAC Spoofing" | \
    ) ; then
 
     # start matlab in a tmux session #
-    tmux new-session -d -s matlab 'matlab -desktop'
+    tmux new-session -d -s "matlab -desktop" matlab -desktop
     sleep 20
 
     # restore previous address and exit #
@@ -23,7 +23,7 @@ if (zenity --password --title "MAC Spoofing" | \
 # get error #
 else
     zenity --error --title "Error" \
-                   --text "Password sbagliata!" \
+                   --text  "Password sbagliata!" \
                    --width=150 --height=80
 fi
 
@@ -32,5 +32,5 @@ sudo -k
 exit 0
 
 ################################################
-##                                bcclsn v2.4 ##
+##                                bcclsn v2.5 ##
 ################################################
