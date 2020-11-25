@@ -21,5 +21,5 @@ alias snapshot='sudo sh /home/bcclsn/.script/btrfs_snap.sh'
 alias routing='java -jar /opt/freeRouting_20190401.jar'
 alias backup='sh .script/backup_mega.sh -b'
 alias free='free -h'
-alias logbackup='cat .log/duplicity.log | tail -n 43'
+alias logcat='cat .log/duplicity.log | tail -n 45'
 alias copy='rsync -a --info=stats1,progress2'                                   # stats=(1:compact - 2:extended) // progress=(1:per-file - 2:total)
