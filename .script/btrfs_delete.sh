@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# WARNING!!! IT'S ONLY AN BETA VERSION
-#            USE IT AT YOUR RISK
-
 # mount snapshot folder #
 mount -t btrfs -o compress=zstd:3,subvol=/ /dev/sda2 /mnt/btrfs
 
