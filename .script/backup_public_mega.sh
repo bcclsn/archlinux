@@ -5,7 +5,8 @@ SCRIPT=$(basename $0)                                                           
 HELP="$SCRIPT [option]\n
  [-b] backup
  [-r] restore
- [-c] cleanup
+ [-c] basic cleanup
+ [-f] hard cleanup
  [-h] help"
 
 # controllo che sia stato passato almeno un argomento #
@@ -15,7 +16,7 @@ if [ $# -eq 0 ] ; then                                                          
 fi
 
 # dichiaro le opzioni accettate (i due punti iniziali sopprimono i messaggi di errore) #
-while getopts ":brch" option ; do
+while getopts ":brcfh" option ; do
 
    # manual OnBootSec monotonic timer option #
    while true ; do OnBootSec=$(cat /proc/uptime | awk '{print $1}') ; if [ ${OnBootSec%.*} -gt 180 ] ; then break ; fi ; done
@@ -94,8 +95,8 @@ while getopts ":brch" option ; do
          fi
          ;;
 
-      c) # cleanup #
-         echo -e "\n*** $(date) ***\n*** CLEANUP\n" >> $LOG
+      c) # basic cleanup #
+         echo -e "\n*** $(date) ***\n*** BASIC CLEANUP\n" >> $LOG
 
          # doing a manual cleanup #
          duplicity cleanup --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
@@ -106,17 +107,34 @@ while getopts ":brch" option ; do
          # notify #
          export DISPLAY=:0 && zenity --info --width=150 --height=80 \
                                             --title="duplicity" \
-                                            --text="cleanup completato" \
+                                            --text="basic cleanup completato" \
                                             --timeout=6 2> /dev/null
          ;;
+      
+      c) # hard cleanup #
+         echo -e "\n*** $(date) ***\n*** HARD CLEANUP\n" >> $LOG
 
-      h) echo -e "\n $HELP";;
-      *) echo -e "\n invalid option!\n\n $HELP";;
+         # doing a manual cleanup #
+         duplicity cleanup --force --log-file=$LOG mega://$USER:$PASS@$HOST/$MDIR
+
+         # unsetting the confidential variables #
+         unset PASSPHRASE
+
+         # notify #
+         export DISPLAY=:0 && zenity --info --width=150 --height=80 \
+                                            --title="duplicity" \
+                                            --text="hard cleanup completato" \
+                                            --timeout=6 2> /dev/null
+         ;;                                   
+
+      h) echo -e "\n $HELP" ;;
+      *) echo -e "\n invalid option!\n\n $HELP" ;;
    esac
 done
+
 exit 0
 
 ################################################################################
-##                                                                bcclsn v2.7 ##
+##                                                                bcclsn v2.8 ##
 ################################################################################
 
