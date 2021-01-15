@@ -111,7 +111,7 @@ while getopts ":brcfh" option ; do
                                             --timeout=6 2> /dev/null
          ;;
       
-      c) # hard cleanup #
+      f) # hard cleanup #
          echo -e "\n*** $(date) ***\n*** HARD CLEANUP\n" >> $LOG
 
          # doing a manual cleanup #
