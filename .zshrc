@@ -6,7 +6,7 @@ export EDITOR='vim'
 HIST_STAMPS="mm/dd/yyyy"
 ZSH_THEME="bcclsn-v2"
 ENABLE_CORRECTION="true"
-plugins=(sudo dirhistory web-search tmux vim-interaction zsh-syntax-highlighting) 
+plugins=(dirhistory web-search zsh-syntax-highlighting) 
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh/alias.zsh
