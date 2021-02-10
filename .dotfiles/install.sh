@@ -30,18 +30,23 @@ echo "Generating grub configuration file..."
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "Linking Dotfiles..."
-
-mkdir -p /home/$USER/.config/systemd/user/
+mkdir -p /home/$USER/.config/systemd/user/ && cd $_
+rm backup.service backup.timer
 ln -s /home/$USER/.dotfiles/systemd/backup.service /home/$USER/.config/systemd/user/backup.service
 ln -s /home/$USER/.dotfiles/systemd/backup.timer /home/$USER/.config/systemd/user/backup.timer
-ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.service /home/$USER/.config/systemd/user/btrfs_snap.service
-ln -s /home/$USER/.dotfiles/systemd/btrfs_snap.timer /home/$USER/.config/systemd/user/btrfs_snap.timer
+
+echo "Copying Dotfiles..."
+cd /etc/systemd/system
+rm btrfs_snap.service btrfs_snap.timer
+cp /home/$USER/.dotfiles/systemd/btrfs_snap.service btrfs_snap.service
+cp /home/$USER/.dotfiles/systemd/btrfs_snap.timer btrfs_snap.timer
 
 sleep 5
+cd /home/$USER
 echo "Done"
 
 echo "Reloading deamons..."
-systemctl --user daemon-reload
+systemctl daemon-reload && systemctl --user daemon-reload
 sleep 5
 
 echo "Enabling Timer 'backup'..."
@@ -49,9 +54,11 @@ systemctl --user enable backup.timer
 sleep 5
  
 echo "Enabling Timer 'btrfs_snap'..."
-systemctl --user enable btrfs_snap.timer
+systemctl enable btrfs_snap.timer
 sleep 5
 
+echo "Done"
+
 ################################################
-##                                bcclsn v1.2 ##
+##                                bcclsn v1.3 ##
 ################################################
