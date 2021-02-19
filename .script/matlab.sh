@@ -2,7 +2,9 @@
 
 # get current mac address and define matlab one #
 curr_mac=$(ip link show wlp1s0 | grep "ether" | cut -c 16- | cut -c -17)
-matl_mac="BA:E8:0E:5C:59:F6"
+matl_mac="32:9E:8C:FC:04:C1"
+
+
 
 # spoofing mac address #
 sudo ip link set dev wlp1s0 down
@@ -10,7 +12,7 @@ sudo ip link set dev wlp1s0 address $matl_mac
 sudo ip link set dev wlp1s0 up
 
 # start matlab in a tmux session #
-tmux new-session -d -s "matlab" matlab -desktop
+tmux new-session -d -s "matlab" env MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre matlab -desktop
 sleep 30
 
 # restore previous address #
