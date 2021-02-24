@@ -105,7 +105,7 @@ while getopts ":brcfh" option ; do
          unset PASSPHRASE
 
          # notify #
-         export DISPLAY=:0 && zenity --info --width=150 --height=80 \
+         export DISPLAY=:0 && zenity --info --width=200 --height=80 \
                                             --title="duplicity" \
                                             --text="basic cleanup completato" \
                                             --timeout=6 2> /dev/null
@@ -121,7 +121,7 @@ while getopts ":brcfh" option ; do
          unset PASSPHRASE
 
          # notify #
-         export DISPLAY=:0 && zenity --info --width=150 --height=80 \
+         export DISPLAY=:0 && zenity --info --width=200 --height=80 \
                                             --title="duplicity" \
                                             --text="hard cleanup completato" \
                                             --timeout=6 2> /dev/null
@@ -135,6 +135,6 @@ done
 exit 0
 
 ################################################################################
-##                                                                bcclsn v2.8 ##
+##                                                                bcclsn v2.9 ##
 ################################################################################
 
