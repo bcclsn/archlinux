@@ -4,8 +4,8 @@
 Version=20.3.x
 Name=ChibiStudio
 Comment=bcclsn
-Exec=/opt/ChibiStudio/ChibiStudio-GCC9.2.1
-Icon=/opt/ChibiStudio/eclipse_2020-03/icon.xpm
+Exec=sh /home/bcclsn/Desktop/ChibiStudio/ChibiStudio-GCC9.2.1
+Icon=/home/bcclsn/Desktop/ChibiStudio/eclipse_2020-03/icon.xpm
 Terminal=false
 Type=Application
 Categories=Utility;Application;
