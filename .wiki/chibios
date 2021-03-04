@@ -8,6 +8,13 @@
 ########################################################
 
 
+
+update mar.21
+- modificarti path chibios & chibistudio
+- importati chibios tools (chibios203)
+- installato ncurses5-compat-libs
+-----------------------------------------------------------------------------------------------------------------
+
 update set.18
 windows -> search path and set CHIBIOS /usr/src/chibios as defined path variables
 -----------------------------------------------------------------------------------------------------------------
