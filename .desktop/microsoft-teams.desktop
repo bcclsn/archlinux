@@ -2,7 +2,8 @@
 Version=1.0
 Name=Microsoft Teams
 GenericName=Teams Client Web Browser
-Exec=/usr/bin/microsoft-edge-dev %U --app=https://teams.microsoft.com/
+#Exec=/usr/bin/microsoft-edge-dev %U --app=https://teams.microsoft.com/
+Exec=/usr/bin/google-chrome-stable %U --app=https://teams.microsoft.com/
 StartupNotify=true
 Terminal=false
 Icon=/home/bcclsn/.icons/teams.png

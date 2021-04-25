@@ -3,7 +3,8 @@ Version=1.0
 Name=Slack
 Comment=Slack Desktop
 GenericName=Slack Client Web Browser
-Exec=/usr/bin/microsoft-edge-dev %U --app=https://3drap.slack.com/
+#Exec=/usr/bin/microsoft-edge-dev %U --app=https://3drap.slack.com/
+Exec=/usr/bin/google-chrome-stable %U --app=https://3drap.slack.com/
 Icon=/home/bcclsn/.icons/slack.png
 Type=Application
 StartupNotify=true
