@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Spotify
+GenericName=Spotify Web Browser
+Exec=/usr/bin/google-chrome-stable %U --app=https://open.spotify.com/
+Icon=/home/bcclsn/.icons/spotify.png
+Type=Application
+StartupNotify=true
