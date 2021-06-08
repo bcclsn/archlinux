@@ -34,3 +34,4 @@ Immagini/
 old.home/
 excluded
 .lesshst
+.cargo/
