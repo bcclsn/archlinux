@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=stlink
+GenericName=Stlink Tools
+Comment=Open source STM32 MCU programming toolset
+Icon=/home/bcclsn/.icons/preferences-desktop-effects.png
+Exec=stlink-gui
+Terminal=false
+Type=Application
+Categories=Development;Electronics;
