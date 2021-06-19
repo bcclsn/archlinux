@@ -1,12 +1,10 @@
 [Desktop Entry]
-Version=1.0
 Name=Microsoft Teams
 GenericName=Teams Client Web Browser
-#Exec=/usr/bin/microsoft-edge-dev %U --app=https://teams.microsoft.com/
 Exec=/usr/bin/google-chrome-stable %U --app=https://teams.microsoft.com/
+Icon=/home/bcclsn/.icons/teams.png
 StartupNotify=true
 Terminal=false
-Icon=/home/bcclsn/.icons/teams.png
 Type=Application
 Categories=GNOME;GTK;Network;WebBrowser;InstantMessaging;
 MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;application/x-xpinstall;application/pdf;application/json;
