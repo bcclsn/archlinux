@@ -4,7 +4,7 @@
 Name=stlink
 GenericName=Stlink Tools
 Comment=Open source STM32 MCU programming toolset
-Icon=/home/bcclsn/.icons/preferences-desktop-effects.png
+Icon=/home/bcclsn/.icons/ogmrip.svg
 Exec=stlink-gui
 Terminal=false
 Type=Application
