@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Office365
+GenericName=Office365 Web Browser
+Exec=/usr/bin/google-chrome-stable %U --app=https://www.office.com/\?auth\=2
+Icon=/home/bcclsn/.icons/office365.png
+Type=Application
+StartupNotify=true
