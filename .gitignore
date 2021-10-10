@@ -36,3 +36,4 @@ excluded
 .lesshst
 .cargo/
 .wine/
+.jd/
