@@ -9,7 +9,8 @@ add pod2man to path: PATH=$PATH:/usr/bin/core_perl
 2. dd if= of= status=progress
 
 ##
-sudo cat /dev/ttyACM0 1&> temp.txt		// acquisisce da seriale
-watch -n 0.5 tail -n 10 temp.txt		// contemporaneamente mostra (su altro terminale) le ultime 10 acquisizioni, ogni 0.5 sec
+sudo cat /dev/ttyACM0 1&> temp.txt                                                               // acquisisce da seriale
+watch -n 0.5 tail -n 10 temp.txt                                                                 // contemporaneamente mostra (su altro terminale) le ultime 10 acquisizioni, ogni 0.5 sec
 
-wc -l temp.txt					// conta le righe del file
+wc -l temp.txt                                                                                   // conta le righe del file
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=finished.pdf file1.pdf file2.pdf          // merge pdf
