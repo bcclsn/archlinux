@@ -31,6 +31,7 @@ while getopts ":brcfh" option ; do
       HOST="mega.nz"
       NAME="insert here the name of the backup"
       DIR="set the directory that you would to backup"
+      PWD="insert here your home path"
       MDIR="set the mega directory"
       LOG="set log path"
 
@@ -49,8 +50,8 @@ while getopts ":brcfh" option ; do
 
          # doing a monthly full backup (1M) #
          duplicity --full-if-older-than 1M \
-                   --exclude ~/.local/share/Trash \
-                   --exclude ~/.cache \
+                   --exclude=$PWD/.local/share/Trash \
+                   --exclude=$PWD/.cache \
                    --log-file=$LOG \
                    --name=$NAME $DIR mega://$USER:$PASS@$HOST/$MDIR
 
@@ -135,6 +136,6 @@ done
 exit 0
 
 ################################################################################
-##                                                                bcclsn v2.9 ##
+##                                                               bcclsn v2.10 ##
 ################################################################################
 
