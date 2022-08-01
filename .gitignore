@@ -38,3 +38,5 @@ excluded
 .wine/
 .jd/
 .android/
+.designer/
+.vscode-oss/
