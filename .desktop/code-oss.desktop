@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=VSCode
+Comment=Code Editing. Redefined.
+GenericName=Text Editor
+Exec=/usr/bin/code-oss --unity-launch %F
+Icon=/home/bcclsn/.icons/visual-studio-code.svg
+Type=Application
+StartupNotify=false
+StartupWMClass=Code
+Categories=TextEditor;Development;IDE;
+MimeType=text/plain;application/x-code-oss-workspace;
+Actions=new-empty-window;
+Keywords=vscode;
+
+[Desktop Action new-empty-window]
+Name=New Empty Window
+Exec=/usr/bin/code-oss --new-window %F
+Icon=/home/bcclsn/.icons/visual-studio-code.svg

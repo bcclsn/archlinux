@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=DeepL Translator
+GenericName=DeepL Translator Web Browser
+Exec=/usr/bin/google-chrome-stable %U --app=https://www.deepl.com/translator
+Icon=/home/bcclsn/.icons/deepl-translator.png
+Type=Application
+StartupNotify=true
